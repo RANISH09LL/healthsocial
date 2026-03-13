@@ -305,10 +305,10 @@ const AppCtx = createContext(null);
 const useApp = () => useContext(AppCtx);
 
 const USERS = [
-  {id:1,name:"Dr. Priya Sharma",email:"priya@doc.com",password:"1234",role:"doctor",avatar:"PS",specialty:"General Physician",consultFee:500,bio:"MBBS, MD. 12 years of clinical practice. Passionate about community health education.",followers:1240,following:89,online:true},
-  {id:2,name:"Dr. Arjun Mehta",email:"arjun@doc.com",password:"1234",role:"doctor",avatar:"AM",specialty:"Neurologist",consultFee:800,bio:"DM Neurology. Headaches, migraines, epilepsy specialist. Love explaining complex conditions simply.",followers:980,following:62,online:false},
-  {id:3,name:"Rahul Verma",email:"rahul@patient.com",password:"1234",role:"patient",avatar:"RV",bio:"Just trying to stay healthy. Father of two, software engineer.",followers:34,following:120,online:true},
-  {id:4,name:"Sneha Kapoor",email:"sneha@patient.com",password:"1234",role:"patient",avatar:"SK",bio:"Fitness enthusiast learning to navigate the healthcare system.",followers:67,following:210,online:false},
+  {id:1,name:"Dr. Priya Sharma",email:"priya@doc.com",password:"1234",role:"doctor",avatar:"PS",specialty:"General Physician",location:"Mumbai, Maharashtra",consultFee:500,bio:"MBBS, MD. 12 years of clinical practice. Passionate about community health education.",followers:1240,following:89,online:true},
+  {id:2,name:"Dr. Arjun Mehta",email:"arjun@doc.com",password:"1234",role:"doctor",avatar:"AM",specialty:"Neurologist",location:"Delhi, NCR",consultFee:800,bio:"DM Neurology. Headaches, migraines, epilepsy specialist. Love explaining complex conditions simply.",followers:980,following:62,online:false},
+  {id:3,name:"Rahul Verma",email:"rahul@patient.com",password:"1234",role:"patient",avatar:"RV",address:"123 Park Street, Kolkata",isAnonymous:false,bio:"Just trying to stay healthy. Father of two, software engineer.",followers:34,following:120,online:true},
+  {id:4,name:"Sneha Kapoor",email:"sneha@patient.com",password:"1234",role:"patient",avatar:"SK",address:"45 Seaface Road, Mumbai",isAnonymous:true,bio:"Fitness enthusiast learning to navigate the healthcare system.",followers:67,following:210,online:false},
 ];
 
 const HASHTAGS = ["#fever","#headache","#skinproblem","#mentalhealth","#dengue","#migraine","#allergy","#hearthealth","#diabetes","#nutrition","#sleep","#anxiety"];
@@ -424,7 +424,7 @@ const Spinner = () => <span style={{width:14,height:14,border:"2px solid rgba(25
    POST CARD COMPONENT
 ════════════════════════════════════════════════════════════════ */
 const PostCard = ({post, idx=0, onHashtagClick, onProfileClick}) => {
-  const {user, toggleLike, toggleSave, addComment} = useApp();
+  const {user, toggleLike, toggleSave, addComment, deletePost} = useApp();
   const [showComments, setShowComments] = useState(false);
   const [cmnt, setCmnt] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -459,15 +459,15 @@ const PostCard = ({post, idx=0, onHashtagClick, onProfileClick}) => {
     <div className={`post-card fu s${Math.min(idx+1,6)}`}
       style={{marginBottom:12}}>
       <div style={{display:"flex",alignItems:"flex-start",gap:12,marginBottom:13}}>
-        <Av init={post.avatar} sz={42} dot={post.userId===user?.id}
-          onClick={()=>onProfileClick&&onProfileClick(post.userId)} />
+        <Av init={(post.isAnonymous || USERS.find(u=>u.id===post.userId)?.isAnonymous) ? "?" : post.avatar} sz={42} dot={post.userId===user?.id}
+          onClick={()=>{if(!(post.isAnonymous || USERS.find(u=>u.id===post.userId)?.isAnonymous)) onProfileClick&&onProfileClick(post.userId)}} />
         <div style={{flex:1,minWidth:0}}>
           <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap",marginBottom:3}}>
-            <span onClick={()=>onProfileClick&&onProfileClick(post.userId)}
-              style={{fontFamily:"var(--font-b)",fontWeight:700,fontSize:14.5,color:"var(--text)",cursor:"pointer"}}
-              onMouseEnter={e=>e.target.style.textDecoration="underline"}
+            <span onClick={()=>{if(!(post.isAnonymous || USERS.find(u=>u.id===post.userId)?.isAnonymous)) onProfileClick&&onProfileClick(post.userId)}}
+              style={{fontFamily:"var(--font-b)",fontWeight:700,fontSize:14.5,color:"var(--text)",cursor:(post.isAnonymous || USERS.find(u=>u.id===post.userId)?.isAnonymous)?"default":"pointer"}}
+              onMouseEnter={e=>{if(!(post.isAnonymous || USERS.find(u=>u.id===post.userId)?.isAnonymous)) e.target.style.textDecoration="underline"}}
               onMouseLeave={e=>e.target.style.textDecoration="none"}>
-              {post.userName}
+              {(post.isAnonymous || USERS.find(u=>u.id===post.userId)?.isAnonymous) ? (post.userId===user?.id ? "Anonymous Patient (You)" : "Anonymous Patient") : post.userName}
             </span>
             {post.role==="doctor"
               ? <span className="badge-doc">{IC.shield} Dr · {post.specialty}</span>
@@ -478,6 +478,11 @@ const PostCard = ({post, idx=0, onHashtagClick, onProfileClick}) => {
           </div>
           <span style={{fontSize:11.5,color:"var(--text3)"}}>{ago(post.createdAt)}</span>
         </div>
+        {post.userId === user?.id && (
+          <button onClick={() => deletePost(post.id)} title="Delete Post" style={{background:"none",border:"none",cursor:"pointer",color:"var(--text3)",padding:4}}>
+            {IC.trash}
+          </button>
+        )}
       </div>
 
       <p style={{fontSize:14.5,lineHeight:1.7,color:"var(--text)",marginBottom:12,whiteSpace:"pre-wrap"}}>
@@ -708,9 +713,9 @@ const LeftSidebar = ({activePage, setPage}) => {
     {id:"feed",   label:"Home Feed",    icon:IC.home},
     {id:"search", label:"Search / Tags",icon:IC.search},
     {id:"doctors",label:"Doctors Only", icon:IC.steth},
-    {id:"consult",label:"AI Consultation",icon:IC.brain},
+    {id:"consult",label:"AI Summariser",icon:IC.brain},
     {id:"outbreak",label:"Outbreak Map",icon:IC.mapPin},
-    {id:"misinfo",label:"Fight Misinfo",icon:IC.shield2},
+    {id:"tests",label:"Book Tests",icon:IC.calendar},
     ...(isDoc ? [{id:"dashboard",label:"Dashboard",icon:IC.clipboard}] : []),
     {id:"trends",label:"Health Trends",icon:IC.trend},
     {id:"profile",label:"My Profile",   icon:IC.user},
@@ -1175,7 +1180,7 @@ const ProfilePage = ({profileUserId, onHashtagClick}) => {
             <h2 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,fontStyle:"italic",color:"var(--text)"}}>{profileUser?.name}</h2>
             {isDoc&&<span className="badge-doc">{IC.shield} Verified MD</span>}
           </div>
-          {isDoc&&<p style={{fontSize:13,color:"var(--teal2)",marginBottom:4}}>🩺 {profileUser?.specialty}</p>}
+          {isDoc&&<p style={{fontSize:13,color:"var(--teal2)",marginBottom:4}}>🩺 {profileUser?.specialty}{profileUser?.location ? ` · 📍 ${profileUser.location}` : ""}</p>}
           <p style={{fontSize:14,color:"var(--text2)",lineHeight:1.55,marginBottom:10}}>{profileUser?.bio}</p>
           <div style={{display:"flex",gap:20,marginBottom:12}}>
             {[["Posts",userPosts.length],["Followers",profileUser?.followers||0],["Following",profileUser?.following||0]].map(([l,v])=>(
@@ -1351,43 +1356,43 @@ const AI_DB = {
 
 const ConsultationPage = () => {
   const {user} = useApp();
-  const [symptoms, setSymptoms] = useState([]);
-  const [input, setInput] = useState("");
+  const [description, setDescription] = useState("");
   const [duration, setDuration] = useState("3 days");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [copied, setCopied] = useState(false);
 
-  const addSymptom = () => {
-    const s = input.trim().toLowerCase();
-    if(s && !symptoms.includes(s)){
-      setSymptoms([...symptoms, s]);
-      setInput("");
-      setResult(null);
-    }
-  };
-
-  const removeSymptom = (s) => {
-    setSymptoms(symptoms.filter(x=>x!==s));
-    setResult(null);
-  };
-
   const generate = async () => {
-    if(symptoms.length===0) return;
+    if(!description.trim()) return;
     setLoading(true);
     await new Promise(r=>setTimeout(r,1800));
-    const matches = symptoms.map(s=>{
+    
+    // Extract keywords
+    const extractedSymptoms = [];
+    const textLower = description.toLowerCase();
+    
+    Object.keys(AI_DB).forEach(k => {
+      if(textLower.includes(k)) extractedSymptoms.push(k);
+    });
+    
+    if(extractedSymptoms.length === 0) {
+      extractedSymptoms.push("general discomfort");
+    }
+
+    const matches = extractedSymptoms.map(s=>{
       const key = Object.keys(AI_DB).find(k=>s.includes(k));
       return key ? {symptom:s,...AI_DB[key]} : {symptom:s,diag:"Requires clinical evaluation",tests:"General physical examination recommended"};
     });
+    
     const diagSet = [...new Set(matches.map(m=>m.diag))];
     const testSet = [...new Set(matches.flatMap(m=>m.tests.split(", ")))];
+    
     setResult({
-      symptoms,
+      symptoms: extractedSymptoms,
       duration,
       diagnoses: diagSet,
       tests: testSet,
-      urgency: symptoms.some(s=>s.includes("chest")||s.includes("breathing")) ? "high" : symptoms.length>=3 ? "moderate" : "low"
+      urgency: textLower.includes("chest")||textLower.includes("breathing")||textLower.includes("severe") ? "high" : extractedSymptoms.length>=3 ? "moderate" : "low"
     });
     setLoading(false);
   };
@@ -1408,7 +1413,7 @@ const ConsultationPage = () => {
         <div style={{display:"flex",alignItems:"center",gap:10}}>
           <div style={{width:36,height:36,background:"linear-gradient(135deg,#8b5cf6,#6d28d9)",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 16px rgba(139,92,246,0.3)"}}>{IC.brain}</div>
           <div>
-            <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic"}}>AI Consultation</h1>
+            <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic"}}>AI Summariser</h1>
             <p style={{fontSize:12,color:"var(--text3)",marginTop:1}}>Structured symptom summary for doctors</p>
           </div>
         </div>
@@ -1418,31 +1423,16 @@ const ConsultationPage = () => {
         <div style={{display:"flex",alignItems:"flex-start",gap:14,marginBottom:16}}>
           <span style={{fontSize:28}}>🩺</span>
           <div>
-            <p style={{fontWeight:800,fontSize:14,color:"var(--text)",marginBottom:4}}>Enter Your Symptoms</p>
-            <p style={{fontSize:13,color:"var(--text2)",lineHeight:1.55}}>Type each symptom and press Enter. The AI will organize them into a structured consultation summary for your doctor.</p>
+            <p style={{fontWeight:800,fontSize:14,color:"var(--text)",marginBottom:4}}>Describe Your Problem</p>
+            <p style={{fontSize:13,color:"var(--text2)",lineHeight:1.55}}>Describe everything you're experiencing in detail. The AI will extract key symptoms and create a summary for your doctor.</p>
           </div>
         </div>
 
-        <div className="symptom-input-row">
-          <input className="inp" value={input} onChange={e=>setInput(e.target.value)}
-            placeholder="e.g. fever, headache, chest pain…"
-            onKeyDown={e=>{if(e.key==="Enter")addSymptom()}}/>
-          <button className="btn-p" onClick={addSymptom} disabled={!input.trim()}
-            style={{padding:"10px 18px",borderRadius:50,flexShrink:0}}>
-            {IC.plus} Add
-          </button>
+        <div style={{marginTop:8}}>
+          <textarea className="inp" value={description} onChange={e=>{setDescription(e.target.value);setResult(null);}}
+            placeholder="e.g. I have been having a severe throbbing headache since yesterday morning and feeling a bit nauseous..."
+            rows={4} style={{resize:"vertical",lineHeight:1.6}}/>
         </div>
-
-        {symptoms.length>0 && (
-          <div className="symptom-chips">
-            {symptoms.map(s=>(
-              <span key={s} className="symptom-chip">
-                {s}
-                <button onClick={()=>removeSymptom(s)}>{IC.trash}</button>
-              </span>
-            ))}
-          </div>
-        )}
 
         <div style={{marginTop:16}}>
           <p style={{fontSize:12,fontWeight:700,color:"var(--text3)",textTransform:"uppercase",letterSpacing:".04em",marginBottom:8}}>Duration</p>
@@ -1455,9 +1445,9 @@ const ConsultationPage = () => {
         </div>
 
         <button className="btn-p" onClick={generate}
-          disabled={symptoms.length===0||loading}
-          style={{marginTop:18,padding:"12px 28px",fontSize:14,width:"100%"}}>
-          {loading ? <><Spinner/> Analyzing symptoms…</> : <>🧠 Generate AI Summary</>}
+          disabled={!description.trim()||loading}
+          style={{marginTop:18,padding:"12px 28px",fontSize:14,width:"100%",borderRadius:50}}>
+          {loading ? <><Spinner/> Analyzing problem…</> : <>🧠 Generate AI Summary</>}
         </button>
       </div>
 
@@ -1864,6 +1854,195 @@ const MisinfoPage = () => {
 /* ════════════════════════════════════════════════════════════════
    LOGIN PAGE — Multi-step registration
 ════════════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════════════
+   MEDICAL TEST PAGE
+════════════════════════════════════════════════════════════════ */
+const MedicalTestPage = () => {
+  const [step, setStep] = useState(1);
+  const [lab, setLab] = useState(null);
+  const [file, setFile] = useState(null);
+  const [verifying, setVerifying] = useState(false);
+  const [verified, setVerified] = useState(false);
+  const [selectedTests, setSelectedTests] = useState([]);
+  const [timeSlot, setTimeSlot] = useState(null);
+  const [confirmed, setConfirmed] = useState(false);
+  const fileInputRef = useRef(null);
+
+  const LABS = [
+    {id:1, name:"Dr. Lal PathLabs", rating:4.8, distance:"1.2 km"},
+    {id:2, name:"SRL Diagnostics", rating:4.6, distance:"2.5 km"},
+    {id:3, name:"Thyrocare", rating:4.5, distance:"3.0 km"},
+    {id:4, name:"Metropolis", rating:4.7, distance:"4.1 km"},
+    {id:5, name:"Apollo Diagnostics", rating:4.9, distance:"5.5 km"}
+  ];
+
+  const TESTS = [
+    "Complete Blood Count (CBC)", "Lipid Profile", "Liver Function Test", 
+    "MRI Scan", "X-Ray", "Sugar-Fasting", "Thyroid Profile (T3, T4, TSH)", "Vitamin D"
+  ];
+
+  const SLOTS = ["Tomorrow, 8:00 AM - 9:00 AM", "Tomorrow, 10:00 AM - 11:00 AM", "Tomorrow, 4:00 PM - 5:00 PM", "Tomorrow, 6:00 PM - 7:00 PM"];
+
+  const handleFile = async (e) => {
+    if(e.target.files?.[0]){
+      setFile(URL.createObjectURL(e.target.files[0]));
+      setVerifying(true);
+      await new Promise(r=>setTimeout(r, 1500));
+      setVerifying(false);
+      setVerified(true);
+    }
+  };
+
+  const toggleTest = (t) => {
+    setSelectedTests(prev => prev.includes(t) ? prev.filter(x=>x!==t) : [...prev, t]);
+  };
+
+  if(confirmed) {
+    return (
+      <div className="ai-page">
+        <div style={{padding:"60px 20px",textAlign:"center"}} className="fi">
+          <div className="confirm-check" style={{margin:"0 auto 20px"}}>
+            <svg width="36" height="36" fill="none" stroke="#fff" strokeWidth="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2 style={{fontFamily:"var(--font-d)",fontSize:26,fontStyle:"italic",color:"var(--text)",marginBottom:12}}>Booking Confirmed!</h2>
+          <p style={{fontSize:15,color:"var(--text2)",marginBottom:6}}>Your tests are scheduled at <strong>{lab.name}</strong></p>
+          <p style={{fontSize:16,fontWeight:800,color:"var(--teal2)",marginBottom:20}}>{timeSlot}</p>
+          <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:14,padding:16,display:"inline-block",textAlign:"left"}}>
+            <p style={{fontSize:12,fontWeight:700,color:"var(--text3)",textTransform:"uppercase",marginBottom:8}}>Tests Booked:</p>
+            <ul style={{margin:0,paddingLeft:20,fontSize:14,color:"var(--text)",lineHeight:1.6}}>
+              {selectedTests.map(t=><li key={t}>{t}</li>)}
+            </ul>
+          </div>
+          <div style={{marginTop:30}}>
+            <button className="btn-p" onClick={()=>{setStep(1);setConfirmed(false);setLab(null);setFile(null);setVerified(false);setSelectedTests([]);setTimeSlot(null);}} style={{padding:"12px 28px",borderRadius:50}}>Book Another Test</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="ai-page">
+      <div className="ai-page-header">
+        <div style={{display:"flex",alignItems:"center",gap:10}}>
+          <div style={{width:36,height:36,background:"linear-gradient(135deg,#00a896,#007a6e)",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 16px rgba(0,168,150,0.3)",color:"#fff"}}>{IC.clipboard}</div>
+          <div>
+            <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic"}}>Book Medical Tests</h1>
+            <p style={{fontSize:12,color:"var(--text3)",marginTop:1}}>Schedule lab tests and health checkups</p>
+          </div>
+        </div>
+      </div>
+
+      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:20}}>
+        {[1,2,3,4].map(s=>(
+          <div key={s} style={{flex:1,display:"flex",alignItems:"center",gap:8}}>
+            <div style={{width:24,height:24,borderRadius:"50%",background:step>=s?"var(--teal)":"var(--surface2)",color:step>=s?"#fff":"var(--text3)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:700,border:step>=s?"1px solid var(--teal)":"1px solid var(--border)",transition:"all .2s"}}>
+              {step>s?IC.check:s}
+            </div>
+            {s<4 && <div style={{flex:1,height:2,background:step>s?"var(--teal)":"var(--border)",transition:"all .2s"}}/>}
+          </div>
+        ))}
+      </div>
+
+      {step === 1 && (
+        <div className="fi">
+          <p style={{fontSize:16,fontWeight:800,color:"var(--text)",marginBottom:14}}>Step 1: Choose a Laboratory</p>
+          <div style={{display:"grid",gap:12}}>
+            {LABS.map(l=>(
+              <div key={l.id} className="ai-card" style={{margin:0,padding:16,cursor:"pointer",display:"flex",alignItems:"center",gap:14,border:lab?.id===l.id?"1.5px solid var(--teal)":"1px solid var(--border)",background:lab?.id===l.id?"var(--teal-bg)":"var(--surface)"}} onClick={()=>setLab(l)}>
+                <div style={{width:40,height:40,borderRadius:10,background:"var(--surface2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18}}>🏥</div>
+                <div style={{flex:1}}>
+                  <p style={{fontWeight:800,fontSize:15,color:"var(--text)"}}>{l.name}</p>
+                  <p style={{fontSize:12.5,color:"var(--text2)",marginTop:2}}>⭐ {l.rating} · 📍 {l.distance}</p>
+                </div>
+                <div style={{width:20,height:20,borderRadius:"50%",border:lab?.id===l.id?"5px solid var(--teal)":"2px solid var(--border2)",display:"flex",alignItems:"center",justifyContent:"center"}}>{lab?.id===l.id && <div style={{width:10,height:10,borderRadius:"50%",background:"var(--teal)"}}/>}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{marginTop:20,textAlign:"right"}}>
+            <button className="btn-p" disabled={!lab} onClick={()=>setStep(2)} style={{padding:"10px 24px",borderRadius:50}}>Next Step &rarr;</button>
+          </div>
+        </div>
+      )}
+
+      {step === 2 && (
+        <div className="fi">
+          <p style={{fontSize:16,fontWeight:800,color:"var(--text)",marginBottom:14}}>Step 2: Upload Prescription</p>
+          <div className="ai-card" style={{padding:24,textAlign:"center"}}>
+            {!file ? (
+              <div style={{padding:20,border:"2px dashed var(--border)",borderRadius:12}}>
+                <div style={{fontSize:32,marginBottom:10}}>📄</div>
+                <p style={{fontSize:14,fontWeight:600,color:"var(--text)",marginBottom:4}}>Upload your doctor's prescription</p>
+                <p style={{fontSize:12,color:"var(--text3)",marginBottom:16}}>JPG, PNG or PDF formats</p>
+                <input type="file" ref={fileInputRef} onChange={handleFile} accept="image/*,.pdf" style={{display:"none"}}/>
+                <button className="btn-g" onClick={()=>fileInputRef.current?.click()}>Choose File</button>
+              </div>
+            ) : verifying ? (
+              <div className="ai-loading">
+                <div style={{fontSize:24}}>🔍</div>
+                <p style={{fontWeight:700,fontSize:14,color:"var(--text)",marginTop:8}}>Verifying prescription using AI...</p>
+                <div className="ai-loading-bar" style={{marginTop:8}}></div>
+              </div>
+            ) : verified ? (
+              <div className="fi" style={{padding:20,background:"rgba(34,197,94,.06)",border:"1px solid rgba(34,197,94,.2)",borderRadius:12}}>
+                <div style={{fontSize:36,color:"#22c55e",marginBottom:10}}>✅</div>
+                <p style={{fontSize:18,fontWeight:800,color:"#15803d",marginBottom:4}}>Verification Approved</p>
+                <p style={{fontSize:13,color:"#15803d",opacity:.8}}>Your prescription has been successfully validated.</p>
+              </div>
+            ) : null}
+          </div>
+          <div style={{marginTop:20,display:"flex",justifyContent:"space-between"}}>
+            <button className="btn-g" onClick={()=>setStep(1)}>Back</button>
+            <button className="btn-p" disabled={!verified} onClick={()=>setStep(3)} style={{padding:"10px 24px",borderRadius:50}}>Next Step &rarr;</button>
+          </div>
+        </div>
+      )}
+
+      {step === 3 && (
+        <div className="fi">
+          <p style={{fontSize:16,fontWeight:800,color:"var(--text)",marginBottom:14}}>Step 3: Select Test Types</p>
+          <div className="ai-card" style={{padding:20}}>
+            <p style={{fontSize:13,color:"var(--text2)",marginBottom:14}}>Select all the tests recommended by your doctor:</p>
+            <div style={{display:"grid",gap:10}}>
+              {TESTS.map(t=>(
+                <label key={t} style={{display:"flex",alignItems:"center",gap:10,padding:"12px 14px",background:selectedTests.includes(t)?"var(--teal-bg)":"var(--surface2)",border:selectedTests.includes(t)?"1px solid var(--teal)":"1px solid var(--border)",borderRadius:10,cursor:"pointer",transition:"all .2s"}}>
+                  <input type="checkbox" checked={selectedTests.includes(t)} onChange={()=>toggleTest(t)} style={{width:16,height:16,accentColor:"var(--teal)"}}/>
+                  <span style={{fontSize:14.5,fontWeight:600,color:selectedTests.includes(t)?"var(--teal2)":"var(--text)"}}>{t}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+          <div style={{marginTop:20,display:"flex",justifyContent:"space-between"}}>
+            <button className="btn-g" onClick={()=>setStep(2)}>Back</button>
+            <button className="btn-p" disabled={selectedTests.length===0} onClick={()=>setStep(4)} style={{padding:"10px 24px",borderRadius:50}}>Next Step &rarr;</button>
+          </div>
+        </div>
+      )}
+
+      {step === 4 && (
+        <div className="fi">
+          <p style={{fontSize:16,fontWeight:800,color:"var(--text)",marginBottom:14}}>Step 4: Select Time Slot</p>
+          <div className="ai-card" style={{padding:20}}>
+             <div style={{display:"grid",gap:10}}>
+              {SLOTS.map(s=>(
+                <button key={s} className="slot-btn" onClick={()=>setTimeSlot(s)} style={{borderColor:timeSlot===s?"var(--teal)":"var(--border2)",background:timeSlot===s?"var(--teal-bg)":"var(--surface)",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                  <span style={{fontWeight:timeSlot===s?800:600,color:timeSlot===s?"var(--teal2)":"var(--text)"}}>{s}</span>
+                  {timeSlot===s&&<span style={{color:"var(--teal)"}}>{IC.check}</span>}
+                </button>
+              ))}
+             </div>
+          </div>
+          <div style={{marginTop:20,display:"flex",justifyContent:"space-between"}}>
+            <button className="btn-g" onClick={()=>setStep(3)}>Back</button>
+            <button className="btn-p" disabled={!timeSlot} onClick={()=>setConfirmed(true)} style={{padding:"10px 24px",borderRadius:50}}>Confirm Booking</button>
+          </div>
+        </div>
+      )}
+
+    </div>
+  );
+};
+
 const LoginPage = ({onLogin}) => {
   const [mode, setMode] = useState("login"); // "login" | "register"
   const [step, setStep] = useState(1); // 1=email/pw, 2=role, 3=details
@@ -1875,6 +2054,7 @@ const LoginPage = ({onLogin}) => {
   const [loading, setLoading] = useState(false);
 
   // Patient fields
+  const [address, setAddress] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
@@ -1911,6 +2091,9 @@ const LoginPage = ({onLogin}) => {
       avatar: initials,
       bio: role==="doctor" ? (shortBio||`${qualification}. ${specialty} specialist.`) : `Svasthya community member.`,
       specialty: role==="doctor" ? specialty : undefined,
+      location: role==="doctor" ? hospital : undefined,
+      address: role==="patient" ? address : undefined,
+      isAnonymous: role==="patient" ? anonDefault : false,
       consultFee: role==="doctor" ? 500 : undefined,
       followers: 0,
       following: 0,
@@ -2073,6 +2256,10 @@ const LoginPage = ({onLogin}) => {
               <span className="badge-pat" style={{marginLeft:"auto"}}>Patient</span>
             </div>
             <div style={{display:"flex",flexDirection:"column",gap:14}}>
+              <div>
+                <label style={labelSt}>Address</label>
+                <input className="inp" value={address} onChange={e=>setAddress(e.target.value)} placeholder="e.g. 123 Health Ave, Mumbai"/>
+              </div>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
                 <div>
                   <label style={labelSt}>Age</label>
@@ -2106,8 +2293,8 @@ const LoginPage = ({onLogin}) => {
               </div>
               <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"14px 16px",background:"var(--surface2)",borderRadius:12,border:"1px solid var(--border)"}}>
                 <div>
-                  <p style={{fontWeight:700,fontSize:13.5,color:"var(--text)",fontFamily:"var(--font-b)"}}>Post anonymously by default</p>
-                  <p style={{fontSize:11.5,color:"var(--text3)",marginTop:2}}>Your name won't show on posts unless you choose</p>
+                  <p style={{fontWeight:700,fontSize:13.5,color:"var(--text)",fontFamily:"var(--font-b)"}}>Anonymous Profile</p>
+                  <p style={{fontSize:11.5,color:"var(--text3)",marginTop:2}}>Hide your name/profile from patients & doctors</p>
                 </div>
                 <button onClick={()=>setAnonDefault(!anonDefault)} style={{width:44,height:24,borderRadius:12,border:"none",cursor:"pointer",background:anonDefault?"var(--teal)":"var(--border2)",transition:"background .2s",position:"relative",flexShrink:0}}>
                   <div style={{width:18,height:18,borderRadius:"50%",background:"#fff",position:"absolute",top:3,left:anonDefault?23:3,transition:"left .2s",boxShadow:"0 1px 3px rgba(0,0,0,.2)"}}/>
@@ -2215,7 +2402,7 @@ const AppointmentModal = ({doctor, onClose}) => {
             <Av init={doctor.avatar} sz={52} ring/>
             <div style={{flex:1}}>
               <p style={{fontWeight:800,fontSize:16}}>{doctor.name}</p>
-              <p style={{fontSize:13,opacity:.85}}>🩺 {doctor.specialty}</p>
+              <p style={{fontSize:13,opacity:.85}}>🩺 {doctor.specialty}{doctor.location ? ` · 📍 ${doctor.location}` : ""}</p>
             </div>
             {doctor.consultFee && (
               <div style={{background:"rgba(255,255,255,.18)",backdropFilter:"blur(8px)",borderRadius:14,padding:"8px 14px",textAlign:"center",border:"1px solid rgba(255,255,255,.25)"}}>
@@ -2589,6 +2776,10 @@ export default function App() {
     setPosts(ps=>ps.map(p=>p.id!==postId?p:{...p,saved:!p.saved}));
   },[]);
 
+  const deletePost = useCallback((postId) => {
+    setPosts(ps=>ps.filter(p=>p.id!==postId));
+  },[]);
+
   const addComment = useCallback((postId, content) => {
     setPosts(ps=>ps.map(p=>p.id!==postId?p:{
       ...p,
@@ -2606,6 +2797,7 @@ export default function App() {
       id:Date.now(),
       userId:authUser.id,userName:authUser.name,avatar:authUser.avatar,
       role:authUser.role,specialty:authUser.specialty,
+      isAnonymous:authUser.isAnonymous,
       ...data,
       likes:0,liked:false,saved:false,
       createdAt:now(),comments:[]
@@ -2622,7 +2814,7 @@ export default function App() {
     if(doc) setAppointmentDoc(doc);
   };
 
-  const ctx = { user:authUser, posts, toggleLike, toggleSave, addComment, addPost, logout, bookAppointment, getProfileData, updateProfile, toggleFollow, isFollowing, theme, toggleTheme };
+  const ctx = { user:authUser, posts, toggleLike, toggleSave, addComment, addPost, deletePost, logout, bookAppointment, getProfileData, updateProfile, toggleFollow, isFollowing, theme, toggleTheme };
 
   if(!authUser) return (
     <>
@@ -2638,7 +2830,7 @@ export default function App() {
       case "doctors": return <DoctorsPage onHashtagClick={goHashtag} onProfileClick={goProfile}/>;
       case "consult": return <ConsultationPage/>;
       case "outbreak": return <OutbreakPage/>;
-      case "misinfo": return <MisinfoPage/>;
+      case "tests": return <MedicalTestPage/>;
       case "dashboard": return <DoctorDashboardPage/>;
       case "trends": return <HealthTrendsPage/>;
       case "profile": return <ProfilePage profileUserId={profileId||authUser.id} onHashtagClick={goHashtag}/>;
