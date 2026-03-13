@@ -34,6 +34,9 @@ const CSS = `
   --shadow:0 2px 12px rgba(0,0,0,0.07),0 1px 3px rgba(0,0,0,0.05);
   --shadow2:0 8px 32px rgba(0,0,0,0.1),0 2px 8px rgba(0,0,0,0.06);
   --shadow3:0 24px 64px rgba(0,0,0,0.14),0 4px 16px rgba(0,0,0,0.07);
+  --bg-blur:rgba(247,248,250,0.9);
+  --tip-card-bg:rgba(255,255,255,0.6);
+  --disclaimer-text:#92400e;
 }
 
 html,body{height:100%;width:100%;margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--font-b);-webkit-font-smoothing:antialiased}
@@ -164,7 +167,7 @@ html,body{height:100%;width:100%;margin:0;padding:0;background:var(--bg);color:v
 @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
 .ai-page{max-width:660px;margin:0 auto;padding:0 16px 80px}
-.ai-page-header{position:sticky;top:0;z-index:19;background:rgba(247,248,250,0.9);backdrop-filter:blur(12px);padding:14px 0 10px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.ai-page-header{position:sticky;top:0;z-index:19;background:var(--bg-blur);backdrop-filter:blur(12px);padding:14px 0 10px;border-bottom:1px solid var(--border);margin-bottom:16px}
 
 .ai-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;margin-bottom:14px;transition:all .22s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden}
 .ai-card:hover{border-color:rgba(0,168,150,0.2);box-shadow:var(--shadow)}
@@ -265,7 +268,7 @@ html,body{height:100%;width:100%;margin:0;padding:0;background:var(--bg);color:v
 .account-row-value{font-size:14px;font-weight:600;color:var(--text);font-family:var(--font-b);word-break:break-all}
 
 /* ── Dark Mode ── */
-.dark{--bg:#0d1117;--surface:#161b22;--surface2:#1c2333;--border:#2d333b;--border2:#3d444d;--teal:#2dd4a8;--teal2:#5eebc5;--teal-bg:rgba(45,212,168,0.08);--teal-bg2:rgba(45,212,168,0.14);--blue:#4da6ff;--coral:#ff6b6b;--gold:#fbbf24;--text:#e6edf3;--text2:#9aa3b2;--text3:#5a6478;--shadow:0 2px 12px rgba(0,0,0,0.3),0 1px 3px rgba(0,0,0,0.2);--shadow2:0 8px 32px rgba(0,0,0,0.4),0 2px 8px rgba(0,0,0,0.2);--shadow3:0 24px 64px rgba(0,0,0,0.5),0 4px 16px rgba(0,0,0,0.3)}
+.dark{--bg:#0d1117;--surface:#161b22;--surface2:#1c2333;--border:#2d333b;--border2:#3d444d;--teal:#2dd4a8;--teal2:#5eebc5;--teal-bg:rgba(45,212,168,0.08);--teal-bg2:rgba(45,212,168,0.14);--blue:#4da6ff;--coral:#ff6b6b;--gold:#fbbf24;--text:#e6edf3;--text2:#9aa3b2;--text3:#5a6478;--shadow:0 2px 12px rgba(0,0,0,0.3),0 1px 3px rgba(0,0,0,0.2);--shadow2:0 8px 32px rgba(0,0,0,0.4),0 2px 8px rgba(0,0,0,0.2);--shadow3:0 24px 64px rgba(0,0,0,0.5),0 4px 16px rgba(0,0,0,0.3);--bg-blur:rgba(13,17,23,0.9);--tip-card-bg:rgba(28,35,51,0.6);--disclaimer-text:#d4a574}
 .dark .login-wrap{background:linear-gradient(135deg,#0d1117 0%,#131922 30%,#111827 70%,#161b22 100%)}
 .dark .login-card{background:#161b22;border-color:#2d333b}
 .dark .badge-doc{background:rgba(45,212,168,.12);border-color:rgba(45,212,168,.3);color:var(--teal2)}
@@ -286,6 +289,8 @@ html,body{height:100%;width:100%;margin:0;padding:0;background:var(--bg);color:v
 .dark .dash-table td{background:#1c2333;border-color:#2d333b}
 .dark .dash-table tr:hover td{background:rgba(45,212,168,.06)}
 .dark .hashtag-pill{background:#1c2333;border-color:#2d333b;color:var(--text2)}
+.dark .page-sticky-header{background:rgba(13,17,23,0.9)}
+.dark .right-rail{background:#161b22;border-color:#2d333b}
 
 /* ── Theme toggle ── */
 .theme-toggle{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;transition:all .18s;font-family:var(--font-b);font-size:12px;font-weight:600;color:var(--text2);width:100%}
@@ -479,6 +484,14 @@ const PostCard = ({post, idx=0, onHashtagClick, onProfileClick}) => {
         {renderContent(post.content)}
       </p>
 
+      {post.image && (
+        <div style={{marginBottom:12,borderRadius:14,overflow:"hidden",border:"1px solid var(--border)"}}>
+          <img src={post.image} alt="Post attachment" style={{width:"100%",maxHeight:360,objectFit:"cover",display:"block",transition:"transform .3s"}}
+            onMouseEnter={e=>e.currentTarget.style.transform="scale(1.02)"}
+            onMouseLeave={e=>e.currentTarget.style.transform="scale(1)"}/>
+        </div>
+      )}
+
       {post.tags?.length>0 && (
         <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:14}}>
           {post.tags.map((t,i)=>(
@@ -570,15 +583,41 @@ const Composer = ({defaultType, placeholder}) => {
   const [text, setText] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [focused, setFocused] = useState(false);
+  const [imgPreview, setImgPreview] = useState(null);
+  const [showTagPicker, setShowTagPicker] = useState(false);
+  const imgInputRef = useRef(null);
+  const textRef = useRef(null);
   const maxChars = 500;
 
+  const handleImageSelect = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) return;
+    if (file.size > 5 * 1024 * 1024) { alert("Image must be under 5MB"); return; }
+    const reader = new FileReader();
+    reader.onload = (ev) => setImgPreview(ev.target.result);
+    reader.readAsDataURL(file);
+    // Reset input so same file can be re-selected
+    e.target.value = "";
+  };
+
+  const removeImage = () => setImgPreview(null);
+
+  const insertTag = (tag) => {
+    const suffix = text.endsWith(" ") || text === "" ? tag + " " : " " + tag + " ";
+    const newText = (text + suffix).slice(0, maxChars);
+    setText(newText);
+    setShowTagPicker(false);
+    textRef.current?.focus();
+  };
+
   const submit = async () => {
-    if(!text.trim()) return;
+    if(!text.trim() && !imgPreview) return;
     setSubmitting(true);
     await new Promise(r=>setTimeout(r,600));
     const tags = [...text.matchAll(/#\w+/g)].map(m=>m[0]);
-    addPost({content:text.trim(), tags, type:defaultType||"patient_post"});
-    setText(""); setFocused(false); setSubmitting(false);
+    addPost({content:text.trim(), tags, type:defaultType||"patient_post", image:imgPreview||null});
+    setText(""); setImgPreview(null); setFocused(false); setSubmitting(false); setShowTagPicker(false);
   };
 
   const pct = text.length/maxChars;
@@ -589,21 +628,50 @@ const Composer = ({defaultType, placeholder}) => {
       <div style={{display:"flex",gap:13,alignItems:"flex-start"}}>
         <Av init={user?.avatar||"?"} sz={42} dot/>
         <div style={{flex:1}}>
-          <textarea className="compose-area"
+          <textarea ref={textRef} className="compose-area"
             value={text} onChange={e=>setText(e.target.value.slice(0,maxChars))}
             onFocus={()=>setFocused(true)}
             placeholder={placeholder||(user?.role==="doctor"?"Share medical knowledge or advice…":"Describe your symptoms or ask a health question…")}
             rows={focused||text?3:1}
             style={{transition:"all .2s",paddingTop:4}}/>
-          {(focused||text) && (
+          {imgPreview && (
+            <div className="fi" style={{position:"relative",marginTop:10,borderRadius:14,overflow:"hidden",border:"1px solid var(--border)"}}>
+              <img src={imgPreview} alt="Preview" style={{width:"100%",maxHeight:240,objectFit:"cover",display:"block"}}/>
+              <button onClick={removeImage}
+                style={{position:"absolute",top:8,right:8,width:28,height:28,borderRadius:"50%",background:"rgba(0,0,0,0.6)",border:"none",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",transition:"background .15s"}}
+                onMouseEnter={e=>e.currentTarget.style.background="rgba(0,0,0,0.8)"}
+                onMouseLeave={e=>e.currentTarget.style.background="rgba(0,0,0,0.6)"}>
+                {IC.close}
+              </button>
+            </div>
+          )}
+          {(focused||text||imgPreview) && (
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginTop:10,paddingTop:10,borderTop:"1px solid var(--border)"}} className="fi">
-              <div style={{display:"flex",gap:6}}>
-                <button className="action-btn" style={{padding:"6px 10px",color:"var(--teal2)"}}>
+              <div style={{display:"flex",gap:6,position:"relative"}}>
+                <input ref={imgInputRef} type="file" accept="image/*" onChange={handleImageSelect} style={{display:"none"}}/>
+                <button className="action-btn" style={{padding:"6px 10px",color:"var(--teal2)"}}
+                  onClick={()=>imgInputRef.current?.click()}>
                   {IC.img}<span style={{fontSize:12}}>Image</span>
                 </button>
-                <button className="action-btn" style={{padding:"6px 10px",color:"var(--teal2)"}}>
+                <button className="action-btn" style={{padding:"6px 10px",color:"var(--teal2)"}}
+                  onClick={()=>setShowTagPicker(!showTagPicker)}>
                   {IC.hash}<span style={{fontSize:12}}>Tag</span>
                 </button>
+                {showTagPicker && (
+                  <div className="si" style={{position:"absolute",top:"100%",left:0,marginTop:6,background:"var(--surface)",border:"1px solid var(--border)",borderRadius:14,padding:"10px 12px",boxShadow:"var(--shadow2)",zIndex:30,width:260,maxHeight:180,overflowY:"auto"}}>
+                    <p style={{fontSize:11,fontWeight:700,color:"var(--text3)",textTransform:"uppercase",letterSpacing:".04em",marginBottom:8}}>Insert Hashtag</p>
+                    <div style={{display:"flex",flexWrap:"wrap",gap:5}}>
+                      {HASHTAGS.map(h=>(
+                        <button key={h} onClick={()=>insertTag(h)}
+                          style={{padding:"4px 10px",borderRadius:20,border:"1px solid var(--border)",background:"var(--surface2)",cursor:"pointer",fontSize:12,fontWeight:600,fontFamily:"var(--font-b)",color:"var(--text2)",transition:"all .15s"}}
+                          onMouseEnter={e=>{e.currentTarget.style.background="var(--teal-bg)";e.currentTarget.style.color="var(--teal)";e.currentTarget.style.borderColor="var(--teal)"}}
+                          onMouseLeave={e=>{e.currentTarget.style.background="var(--surface2)";e.currentTarget.style.color="var(--text2)";e.currentTarget.style.borderColor="var(--border)"}}>
+                          {h}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
               <div style={{display:"flex",alignItems:"center",gap:12}}>
                 <svg width="24" height="24" style={{transform:"rotate(-90deg)"}}>
@@ -615,7 +683,7 @@ const Composer = ({defaultType, placeholder}) => {
                     style={{transition:"all .2s"}}/>
                 </svg>
                 <span style={{fontSize:11.5,color:pct>.9?"#ef4444":"var(--text3)"}}>{maxChars-text.length}</span>
-                <button className="btn-p" onClick={submit} disabled={!text.trim()||submitting}
+                <button className="btn-p" onClick={submit} disabled={(!text.trim()&&!imgPreview)||submitting}
                   style={{padding:"8px 20px",fontSize:13}}>
                   {submitting?<Spinner/>:user?.role==="doctor"?"Publish":"Post"}
                 </button>
@@ -627,6 +695,7 @@ const Composer = ({defaultType, placeholder}) => {
     </div>
   );
 };
+
 
 /* ════════════════════════════════════════════════════════════════
    LEFT SIDEBAR
@@ -751,7 +820,7 @@ const RightSidebar = ({onHashtagClick}) => {
           <span style={{fontFamily:"var(--font-b)",fontWeight:800,fontSize:13,color:"var(--text)"}}>Daily Health Tips</span>
         </div>
         {tips.map((t,i)=>(
-          <div key={i} style={{display:"flex",gap:10,alignItems:"flex-start",marginBottom:10,padding:"8px 10px",background:"rgba(255,255,255,0.6)",borderRadius:10}}>
+          <div key={i} style={{display:"flex",gap:10,alignItems:"flex-start",marginBottom:10,padding:"8px 10px",background:"var(--tip-card-bg)",borderRadius:10}}>
             <span style={{fontSize:18,flexShrink:0}}>{t.icon}</span>
             <p style={{fontSize:12.5,color:"var(--text2)",lineHeight:1.5}}>{t.text}</p>
           </div>
@@ -759,7 +828,7 @@ const RightSidebar = ({onHashtagClick}) => {
       </div>
       <div style={{marginTop:16,padding:"10px 12px",background:"rgba(245,158,11,.06)",border:"1px solid rgba(245,158,11,.2)",borderRadius:12,display:"flex",gap:7,alignItems:"flex-start"}}>
         {IC.alert}
-        <p style={{fontSize:11.5,color:"#92400e",lineHeight:1.5}}>Svasthya is for informational guidance only and does not replace professional medical advice.</p>
+        <p style={{fontSize:11.5,color:"var(--disclaimer-text)",lineHeight:1.5}}>Svasthya is for informational guidance only and does not replace professional medical advice.</p>
       </div>
     </div>
   );
@@ -774,7 +843,7 @@ const FeedPage = ({onHashtagClick, onProfileClick}) => {
 
   return (
     <div style={{maxWidth:600,margin:"0 auto",padding:"0 16px 80px"}}>
-      <div style={{position:"sticky",top:0,zIndex:19,background:"rgba(247,248,250,0.9)",backdropFilter:"blur(12px)",padding:"14px 0 10px",borderBottom:"1px solid var(--border)",marginBottom:0}}>
+      <div style={{position:"sticky",top:0,zIndex:19,background:"var(--bg-blur)",backdropFilter:"blur(12px)",padding:"14px 0 10px",borderBottom:"1px solid var(--border)",marginBottom:0}}>
         <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic"}}>Home Feed</h1>
         <p style={{fontSize:12,color:"var(--text3)",marginTop:2}}>{feedPosts.length} posts from your community</p>
       </div>
@@ -820,13 +889,13 @@ const SearchPage = ({initialTag, onProfileClick}) => {
 
   return (
     <div style={{maxWidth:600,margin:"0 auto",padding:"0 16px 80px"}}>
-      <div style={{position:"sticky",top:0,zIndex:19,background:"rgba(247,248,250,0.9)",backdropFilter:"blur(12px)",padding:"14px 0 12px",borderBottom:"1px solid var(--border)"}}>
+      <div style={{position:"sticky",top:0,zIndex:19,background:"var(--bg-blur)",backdropFilter:"blur(12px)",padding:"14px 0 12px",borderBottom:"1px solid var(--border)"}}>
         <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic",marginBottom:12}}>Search</h1>
         <div style={{position:"relative"}}>
           <span style={{position:"absolute",left:14,top:"50%",transform:"translateY(-50%)",color:"var(--text3)"}}>{IC.search}</span>
           <input className="inp" value={query} onChange={e=>{setQuery(e.target.value);setActiveTag(null);}}
             placeholder="Search posts, symptoms, hashtags…"
-            style={{paddingLeft:44,background:"#fff",borderRadius:50}}/>
+            style={{paddingLeft:44,background:"var(--surface)",borderRadius:50}}/>
           {query&&<button onClick={()=>setQuery("")} style={{position:"absolute",right:14,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",color:"var(--text3)"}}>{IC.close}</button>}
         </div>
       </div>
@@ -874,7 +943,7 @@ const DoctorsPage = ({onHashtagClick, onProfileClick}) => {
 
   return (
     <div style={{maxWidth:600,margin:"0 auto",padding:"0 16px 80px"}}>
-      <div style={{position:"sticky",top:0,zIndex:19,background:"rgba(247,248,250,0.9)",backdropFilter:"blur(12px)",padding:"14px 0 10px",borderBottom:"1px solid var(--border)",marginBottom:0}}>
+      <div style={{position:"sticky",top:0,zIndex:19,background:"var(--bg-blur)",backdropFilter:"blur(12px)",padding:"14px 0 10px",borderBottom:"1px solid var(--border)",marginBottom:0}}>
         <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic"}}>Knowledge Hub</h1>
         <p style={{fontSize:12,color:"var(--text3)",marginTop:2}}>Medical knowledge shared by verified doctors</p>
       </div>
