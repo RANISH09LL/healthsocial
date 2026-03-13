@@ -235,6 +235,61 @@ html,body{height:100%;width:100%;margin:0;padding:0;background:var(--bg);color:v
 
 /* ── Chart bars ── */
 .chart-bar-h{height:28px;border-radius:6px;transition:width .8s cubic-bezier(.22,1,.36,1);position:relative;display:flex;align-items:center;padding-left:10px;font-size:11px;font-weight:700;color:#fff;min-width:30px}
+
+/* ── Profile Photo Upload ── */
+.profile-pic-upload{position:relative;cursor:pointer;display:inline-block}
+.profile-pic-upload:hover .pic-overlay{opacity:1}
+.pic-overlay{position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;color:#fff}
+.profile-pic-img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+
+/* ── Edit Profile Modal ── */
+.edit-profile-form{display:flex;flex-direction:column;gap:18px;padding:24px 28px}
+.edit-profile-form label{font-size:11.5px;font-weight:700;color:var(--text2);font-family:var(--font-b);text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px}
+.edit-profile-form .inp{width:100%}
+.edit-photo-area{display:flex;align-items:center;gap:20px}
+.photo-preview{width:80px;height:80px;border-radius:50%;position:relative;overflow:hidden;flex-shrink:0;border:3px solid var(--border)}
+.photo-preview img{width:100%;height:100%;object-fit:cover}
+.photo-preview .initials-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-weight:800;font-family:var(--font-b);color:#fff;font-size:28px}
+.photo-actions{display:flex;flex-direction:column;gap:8px}
+
+/* ── Account Details Card ── */
+.account-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;margin-bottom:16px}
+.account-card-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.account-card-header h3{font-family:var(--font-b);font-size:14px;font-weight:800;color:var(--text)}
+.account-row{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border);transition:background .15s}
+.account-row:last-child{border-bottom:none}
+.account-row:hover{background:var(--surface2)}
+.account-row-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.account-row-content{flex:1;min-width:0}
+.account-row-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--text3);margin-bottom:2px;font-family:var(--font-b)}
+.account-row-value{font-size:14px;font-weight:600;color:var(--text);font-family:var(--font-b);word-break:break-all}
+
+/* ── Dark Mode ── */
+.dark{--bg:#0d1117;--surface:#161b22;--surface2:#1c2333;--border:#2d333b;--border2:#3d444d;--teal:#2dd4a8;--teal2:#5eebc5;--teal-bg:rgba(45,212,168,0.08);--teal-bg2:rgba(45,212,168,0.14);--blue:#4da6ff;--coral:#ff6b6b;--gold:#fbbf24;--text:#e6edf3;--text2:#9aa3b2;--text3:#5a6478;--shadow:0 2px 12px rgba(0,0,0,0.3),0 1px 3px rgba(0,0,0,0.2);--shadow2:0 8px 32px rgba(0,0,0,0.4),0 2px 8px rgba(0,0,0,0.2);--shadow3:0 24px 64px rgba(0,0,0,0.5),0 4px 16px rgba(0,0,0,0.3)}
+.dark .login-wrap{background:linear-gradient(135deg,#0d1117 0%,#131922 30%,#111827 70%,#161b22 100%)}
+.dark .login-card{background:#161b22;border-color:#2d333b}
+.dark .badge-doc{background:rgba(45,212,168,.12);border-color:rgba(45,212,168,.3);color:var(--teal2)}
+.dark .badge-pat{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.3);color:#fbbf24}
+.dark .post-card{background:#161b22;border-color:#2d333b}
+.dark .post-card:hover{border-color:rgba(45,212,168,0.3)}
+.dark .composer{background:#161b22;border-color:#2d333b}
+.dark .trend-card{background:#1c2333;border-color:#2d333b}
+.dark .btn-p{background:linear-gradient(135deg,#2dd4a8,#00a896)}
+.dark .overlay{background:rgba(0,0,0,0.7)}
+.dark .modal-box{background:#161b22;border-color:#2d333b}
+.dark .inp{background:#1c2333;border-color:#2d333b;color:var(--text)}
+.dark .inp:focus{background:#161b22}
+.dark .ai-card{background:#161b22;border-color:#2d333b}
+.dark .account-card{background:#161b22;border-color:#2d333b}
+.dark .slot-btn{background:#1c2333;border-color:#2d333b;color:var(--text)}
+.dark .profile-cover{background:linear-gradient(135deg,#0a4a43 0%,#073b36 40%,#0d2d5e 100%)}
+.dark .dash-table td{background:#1c2333;border-color:#2d333b}
+.dark .dash-table tr:hover td{background:rgba(45,212,168,.06)}
+.dark .hashtag-pill{background:#1c2333;border-color:#2d333b;color:var(--text2)}
+
+/* ── Theme toggle ── */
+.theme-toggle{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;transition:all .18s;font-family:var(--font-b);font-size:12px;font-weight:600;color:var(--text2);width:100%}
+.theme-toggle:hover{border-color:var(--teal);color:var(--teal)}
 `;
 
 
@@ -245,8 +300,8 @@ const AppCtx = createContext(null);
 const useApp = () => useContext(AppCtx);
 
 const USERS = [
-  {id:1,name:"Dr. Priya Sharma",email:"priya@doc.com",password:"1234",role:"doctor",avatar:"PS",specialty:"General Physician",bio:"MBBS, MD. 12 years of clinical practice. Passionate about community health education.",followers:1240,following:89,online:true},
-  {id:2,name:"Dr. Arjun Mehta",email:"arjun@doc.com",password:"1234",role:"doctor",avatar:"AM",specialty:"Neurologist",bio:"DM Neurology. Headaches, migraines, epilepsy specialist. Love explaining complex conditions simply.",followers:980,following:62,online:false},
+  {id:1,name:"Dr. Priya Sharma",email:"priya@doc.com",password:"1234",role:"doctor",avatar:"PS",specialty:"General Physician",consultFee:500,bio:"MBBS, MD. 12 years of clinical practice. Passionate about community health education.",followers:1240,following:89,online:true},
+  {id:2,name:"Dr. Arjun Mehta",email:"arjun@doc.com",password:"1234",role:"doctor",avatar:"AM",specialty:"Neurologist",consultFee:800,bio:"DM Neurology. Headaches, migraines, epilepsy specialist. Love explaining complex conditions simply.",followers:980,following:62,online:false},
   {id:3,name:"Rahul Verma",email:"rahul@patient.com",password:"1234",role:"patient",avatar:"RV",bio:"Just trying to stay healthy. Father of two, software engineer.",followers:34,following:120,online:true},
   {id:4,name:"Sneha Kapoor",email:"sneha@patient.com",password:"1234",role:"patient",avatar:"SK",bio:"Fitness enthusiast learning to navigate the healthcare system.",followers:67,following:210,online:false},
 ];
@@ -322,6 +377,12 @@ const IC = {
   trash:<svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>,
   clipboard:<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>,
   activity:<svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.9" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>,
+  camera:<svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>,
+  edit:<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>,
+  mail:<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>,
+  calendar:<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
+  badge:<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 15l-2 5 2-1 2 1-2-5z"/><circle cx="12" cy="8" r="6"/></svg>,
+  phone:<svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>,
 };
 
 /* ════════════════════════════════════════════════════════════════
@@ -345,9 +406,9 @@ const AV_G = [
 ];
 const avColor = s => AV_G[(s||"A").charCodeAt(0)%AV_G.length];
 
-const Av = ({init="?",sz=38,ring=false,dot=false,onClick}) => (
-  <div onClick={onClick} style={{width:sz,height:sz,borderRadius:"50%",background:avColor(init),display:"flex",alignItems:"center",justifyContent:"center",fontSize:sz*.33,fontWeight:800,fontFamily:"var(--font-b)",flexShrink:0,color:"#fff",position:"relative",cursor:onClick?"pointer":undefined,boxShadow:ring?"0 0 0 2.5px #fff,0 0 0 4px var(--teal)":undefined,transition:"transform .18s"}}>
-    {init.slice(0,2).toUpperCase()}
+const Av = ({init="?",sz=38,ring=false,dot=false,onClick,pic=null}) => (
+  <div onClick={onClick} style={{width:sz,height:sz,borderRadius:"50%",background:pic?"transparent":avColor(init),display:"flex",alignItems:"center",justifyContent:"center",fontSize:sz*.33,fontWeight:800,fontFamily:"var(--font-b)",flexShrink:0,color:"#fff",position:"relative",cursor:onClick?"pointer":undefined,boxShadow:ring?"0 0 0 2.5px #fff,0 0 0 4px var(--teal)":undefined,transition:"transform .18s",overflow:"hidden"}}>
+    {pic ? <img src={pic} alt="" style={{width:"100%",height:"100%",objectFit:"cover",borderRadius:"50%"}}/> : init.slice(0,2).toUpperCase()}
     {dot&&<span style={{position:"absolute",bottom:1,right:1,width:9,height:9,background:"#22c55e",borderRadius:"50%",border:"2px solid #fff"}}/>}
   </div>
 );
@@ -571,7 +632,7 @@ const Composer = ({defaultType, placeholder}) => {
    LEFT SIDEBAR
 ════════════════════════════════════════════════════════════════ */
 const LeftSidebar = ({activePage, setPage}) => {
-  const {user, logout} = useApp();
+  const {user, logout, theme, toggleTheme} = useApp();
   const isDoc = user?.role==="doctor";
 
   const navItems = [
@@ -593,7 +654,7 @@ const LeftSidebar = ({activePage, setPage}) => {
           <div style={{width:36,height:36,background:"linear-gradient(135deg,#00a896,#007a6e)",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 16px rgba(0,168,150,0.3)"}}>
             <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
           </div>
-          <span className="nav-logo-text" style={{fontFamily:"var(--font-d)",fontSize:20,fontWeight:400,color:"var(--text)",letterSpacing:"-.01em",fontStyle:"italic"}}>CareCircle</span>
+          <span className="nav-logo-text" style={{fontFamily:"var(--font-d)",fontSize:20,fontWeight:400,color:"var(--text)",letterSpacing:"-.01em",fontStyle:"italic"}}>Svasthya</span>
         </div>
       </div>
       <nav style={{padding:"12px 12px",flex:1}}>
@@ -617,6 +678,13 @@ const LeftSidebar = ({activePage, setPage}) => {
             <p style={{fontSize:11,color:isDoc?"var(--teal2)":"#b45309"}}>{isDoc?`🩺 ${user.specialty||"Doctor"}`:"🧑 Patient"}</p>
           </div>
         </div>
+        <button className="theme-toggle" onClick={toggleTheme} style={{marginBottom:8}}>
+          {theme==="dark" ? (
+            <><svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><span>Light Mode</span></>
+          ) : (
+            <><svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span>Dark Mode</span></>
+          )}
+        </button>
         <button className="nav-item" onClick={logout} style={{color:"#ef4444",borderRadius:12}}>
           <span style={{flexShrink:0}}>{IC.logout}</span>
           <span>Log Out</span>
@@ -653,7 +721,7 @@ const RightSidebar = ({onHashtagClick}) => {
     <div className="right-rail">
       <div style={{position:"relative",marginBottom:20}}>
         <span style={{position:"absolute",left:12,top:"50%",transform:"translateY(-50%)",color:"var(--text3)"}}>{IC.search}</span>
-        <input className="inp" placeholder="Search CareCircle…" style={{paddingLeft:40,fontSize:13}}/>
+        <input className="inp" placeholder="Search Svasthya…" style={{paddingLeft:40,fontSize:13}}/>
       </div>
       <div style={{background:"var(--surface2)",borderRadius:18,border:"1px solid var(--border)",marginBottom:16,overflow:"hidden"}}>
         <div style={{padding:"14px 16px",borderBottom:"1px solid var(--border)",display:"flex",alignItems:"center",gap:8}}>
@@ -691,7 +759,7 @@ const RightSidebar = ({onHashtagClick}) => {
       </div>
       <div style={{marginTop:16,padding:"10px 12px",background:"rgba(245,158,11,.06)",border:"1px solid rgba(245,158,11,.2)",borderRadius:12,display:"flex",gap:7,alignItems:"flex-start"}}>
         {IC.alert}
-        <p style={{fontSize:11.5,color:"#92400e",lineHeight:1.5}}>CareCircle is for informational guidance only and does not replace professional medical advice.</p>
+        <p style={{fontSize:11.5,color:"#92400e",lineHeight:1.5}}>Svasthya is for informational guidance only and does not replace professional medical advice.</p>
       </div>
     </div>
   );
@@ -842,18 +910,165 @@ const DoctorsPage = ({onHashtagClick, onProfileClick}) => {
 };
 
 /* ════════════════════════════════════════════════════════════════
+   EDIT PROFILE MODAL
+════════════════════════════════════════════════════════════════ */
+const EditProfileModal = ({profileUser, onClose, onSave, currentData}) => {
+  const fileRef = useRef(null);
+  const [name, setName] = useState(currentData.name || profileUser?.name || "");
+  const [bio, setBio] = useState(currentData.bio || profileUser?.bio || "");
+  const [specialty, setSpecialty] = useState(currentData.specialty || profileUser?.specialty || "");
+  const [phone, setPhone] = useState(currentData.phone || "");
+  const [pic, setPic] = useState(currentData.profilePic || null);
+  const [saving, setSaving] = useState(false);
+  const [dragOver, setDragOver] = useState(false);
+  const isDoc = profileUser?.role === "doctor";
+
+  const handleFile = (file) => {
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) {
+      alert("Image must be under 2MB");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (e) => setPic(e.target.result);
+    reader.readAsDataURL(file);
+  };
+
+  const handleInputChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) handleFile(file);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragOver(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file && file.type.startsWith("image/")) handleFile(file);
+  };
+
+  const removePic = () => setPic(null);
+
+  const save = async () => {
+    setSaving(true);
+    await new Promise(r => setTimeout(r, 500));
+    onSave({ name: name.trim() || profileUser?.name, bio: bio.trim(), specialty: specialty.trim(), phone: phone.trim(), profilePic: pic });
+    setSaving(false);
+    onClose();
+  };
+
+  return (
+    <div className="overlay" onClick={onClose}>
+      <div className="modal-box" onClick={e => e.stopPropagation()} style={{ padding: 0, maxWidth: 500 }}>
+        <div style={{ background: "linear-gradient(135deg,#00a896,#007a6e)", padding: "20px 28px", borderRadius: "28px 28px 0 0", color: "#fff", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            {IC.edit}
+            <span style={{ fontSize: 18, fontFamily: "var(--font-d)", fontStyle: "italic", fontWeight: 300 }}>Edit Profile</span>
+          </div>
+          <button onClick={onClose} style={{ background: "rgba(255,255,255,.15)", border: "none", borderRadius: "50%", width: 32, height: 32, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff" }}>{IC.close}</button>
+        </div>
+
+        <div className="edit-profile-form">
+          {/* Profile Photo */}
+          <div>
+            <label>Profile Photo</label>
+            <div className="edit-photo-area"
+              onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={handleDrop}>
+              <div className="photo-preview" style={{ border: dragOver ? "3px solid var(--teal)" : undefined }}>
+                {pic
+                  ? <img src={pic} alt="Profile" />
+                  : <div className="initials-fallback" style={{ background: avColor(profileUser?.avatar || "?") }}>
+                      {(profileUser?.avatar || "?").slice(0, 2).toUpperCase()}
+                    </div>
+                }
+              </div>
+              <div className="photo-actions">
+                <input ref={fileRef} type="file" accept="image/*" onChange={handleInputChange} style={{ display: "none" }} />
+                <button className="btn-p" onClick={() => fileRef.current?.click()} style={{ padding: "8px 16px", fontSize: 12, borderRadius: 50 }}>
+                  {IC.camera} Upload Photo
+                </button>
+                {pic && (
+                  <button className="btn-g" onClick={removePic} style={{ padding: "6px 14px", fontSize: 12 }}>
+                    {IC.trash} Remove
+                  </button>
+                )}
+                <p style={{ fontSize: 11, color: "var(--text3)", lineHeight: 1.4 }}>JPG, PNG under 2MB. Drag & drop supported.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Name */}
+          <div>
+            <label>Full Name</label>
+            <input className="inp" value={name} onChange={e => setName(e.target.value)} placeholder="Your full name" />
+          </div>
+
+          {/* Specialty (doctors only) */}
+          {isDoc && (
+            <div>
+              <label>Specialty</label>
+              <input className="inp" value={specialty} onChange={e => setSpecialty(e.target.value)} placeholder="e.g. Cardiologist, Neurologist" />
+            </div>
+          )}
+
+          {/* Bio */}
+          <div>
+            <label>Bio</label>
+            <textarea className="inp" value={bio} onChange={e => setBio(e.target.value)} placeholder="Tell the community about yourself…" rows={3} style={{ resize: "none" }} />
+          </div>
+
+          {/* Phone */}
+          <div>
+            <label>Phone Number (optional)</label>
+            <input className="inp" value={phone} onChange={e => setPhone(e.target.value)} placeholder="+91 98765 43210" type="tel" />
+          </div>
+
+          {/* Actions */}
+          <div style={{ display: "flex", gap: 10, justifyContent: "flex-end", paddingTop: 8, borderTop: "1px solid var(--border)" }}>
+            <button className="btn-g" onClick={onClose} style={{ padding: "10px 20px" }}>Cancel</button>
+            <button className="btn-p" onClick={save} disabled={saving} style={{ padding: "10px 24px", borderRadius: 50, fontSize: 13.5 }}>
+              {saving ? <><Spinner /> Saving…</> : <>{IC.check} Save Changes</>}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ════════════════════════════════════════════════════════════════
    PROFILE PAGE
 ════════════════════════════════════════════════════════════════ */
 const ProfilePage = ({profileUserId, onHashtagClick}) => {
-  const {user, posts, bookAppointment} = useApp();
-  const profileUser = USERS.find(u=>u.id===profileUserId) || user;
+  const {user, posts, bookAppointment, getProfileData, updateProfile, toggleFollow, isFollowing} = useApp();
+  const baseUser = USERS.find(u=>u.id===profileUserId) || user;
+  const profileData = getProfileData ? getProfileData(baseUser?.id) : {};
+  const profileUser = {...baseUser, ...profileData, avatar: baseUser?.avatar};
   const [activeTab, setActiveTab] = useState("posts");
+  const [showEditModal, setShowEditModal] = useState(false);
   const isDoc = profileUser?.role==="doctor";
   const isOwnProfile = profileUser?.id===user?.id;
+  const profilePic = profileData?.profilePic || null;
 
   const userPosts = posts.filter(p=>p.userId===profileUser?.id);
   const savedPosts = posts.filter(p=>p.saved);
   const patientReports = SYMPTOM_REPORTS.filter(r=>r.patientId===profileUser?.id);
+
+  const handleSaveProfile = (data) => {
+    if (updateProfile) updateProfile(baseUser?.id, data);
+  };
+
+  // Get current user's profile pic for display
+  const getProfilePic = (userId) => {
+    if (getProfileData) {
+      const pd = getProfileData(userId);
+      return pd?.profilePic || null;
+    }
+    return null;
+  };
+
+  const joinedDate = "January 2024"; // simulated since no real backend
 
   return (
     <div style={{maxWidth:600,margin:"0 auto",paddingBottom:80}}>
@@ -864,16 +1079,25 @@ const ProfilePage = ({profileUserId, onHashtagClick}) => {
       </div>
       <div style={{padding:"0 20px",background:"var(--surface)",borderBottom:"1px solid var(--border)"}}>
         <div style={{display:"flex",alignItems:"flex-end",justifyContent:"space-between",marginTop:-24,marginBottom:14}}>
-          <div style={{boxShadow:"0 0 0 4px #fff",borderRadius:"50%"}}>
-            <Av init={profileUser?.avatar||"?"} sz={72} ring={isDoc}/>
+          <div style={{boxShadow:"0 0 0 4px #fff",borderRadius:"50%",position:"relative"}}>
+            <Av init={profileUser?.avatar||"?"} sz={72} ring={isDoc} pic={profilePic}/>
+            {isOwnProfile && (
+              <div onClick={()=>setShowEditModal(true)}
+                style={{position:"absolute",bottom:0,right:0,width:26,height:26,borderRadius:"50%",background:"var(--teal)",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",border:"2px solid #fff",boxShadow:"0 2px 8px rgba(0,0,0,0.15)"}}>
+                <svg width="12" height="12" fill="none" stroke="#fff" strokeWidth="2.5" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              </div>
+            )}
           </div>
           <div style={{display:"flex",gap:8}}>
             {isDoc && !isOwnProfile && bookAppointment && (
               <button className="btn-p" onClick={()=>bookAppointment(profileUser.id)} style={{padding:"8px 18px",borderRadius:50}}>📅 Book Appointment</button>
             )}
             {isOwnProfile
-              ? <button className="btn-g" style={{padding:"7px 18px"}}>Edit Profile</button>
-              : <button className="btn-p" style={{padding:"8px 20px"}}>Follow</button>
+              ? <button className="btn-g" onClick={()=>setShowEditModal(true)} style={{padding:"7px 18px"}}>{IC.edit} Edit Profile</button>
+              : <button className="btn-p" onClick={()=>toggleFollow(profileUser.id)}
+                  style={{padding:"8px 20px",background:isFollowing(profileUser.id)?"transparent":undefined,border:isFollowing(profileUser.id)?"1.5px solid var(--teal)":undefined,color:isFollowing(profileUser.id)?"var(--teal)":undefined}}>
+                  {isFollowing(profileUser.id)?"Following ✓":"Follow"}
+                </button>
             }
           </div>
         </div>
@@ -894,7 +1118,7 @@ const ProfilePage = ({profileUserId, onHashtagClick}) => {
           </div>
         </div>
         <div style={{display:"flex",gap:0,borderTop:"1px solid var(--border)"}}>
-          {[["posts","Posts"],["saved","Saved"],["history","History"]].map(([id,label])=>(
+          {[["posts","Posts"],["account","Account"],["saved","Saved"],["history","History"]].map(([id,label])=>(
             <button key={id} onClick={()=>setActiveTab(id)}
               style={{flex:1,padding:"12px 0",background:"none",border:"none",cursor:"pointer",fontSize:14,fontWeight:700,fontFamily:"var(--font-b)",color:activeTab===id?"var(--teal)":"var(--text3)",borderBottom:`2px solid ${activeTab===id?"var(--teal)":"transparent"}`,transition:"all .2s"}}>
               {label}
@@ -907,6 +1131,87 @@ const ProfilePage = ({profileUserId, onHashtagClick}) => {
           userPosts.length===0
             ? <div style={{textAlign:"center",padding:"48px",color:"var(--text3)"}}><div style={{fontSize:40,marginBottom:12}}>📝</div><p style={{fontFamily:"var(--font-d)",fontSize:18,fontStyle:"italic",color:"var(--text2)"}}>No posts yet</p></div>
             : userPosts.map((p,i)=><PostCard key={p.id} post={p} idx={i} onHashtagClick={onHashtagClick}/>)
+        )}
+        {activeTab==="account"&&(
+          <div className="fu">
+            <div className="account-card si">
+              <div className="account-card-header">
+                <span style={{fontSize:18}}>👤</span>
+                <h3>Account Details</h3>
+              </div>
+              <div className="account-row">
+                <div className="account-row-icon" style={{background:"var(--teal-bg)"}}>{IC.user}</div>
+                <div className="account-row-content">
+                  <div className="account-row-label">Full Name</div>
+                  <div className="account-row-value">{profileUser?.name}</div>
+                </div>
+              </div>
+              <div className="account-row">
+                <div className="account-row-icon" style={{background:"rgba(26,115,232,.08)"}}>{IC.mail}</div>
+                <div className="account-row-content">
+                  <div className="account-row-label">Email Address</div>
+                  <div className="account-row-value">{profileUser?.email || "—"}</div>
+                </div>
+              </div>
+              <div className="account-row">
+                <div className="account-row-icon" style={{background:"rgba(245,158,11,.08)"}}>{IC.badge}</div>
+                <div className="account-row-content">
+                  <div className="account-row-label">Role</div>
+                  <div className="account-row-value" style={{display:"flex",alignItems:"center",gap:8}}>
+                    {isDoc
+                      ? <span className="badge-doc">{IC.shield} Verified Doctor</span>
+                      : <span className="badge-pat">Patient</span>
+                    }
+                  </div>
+                </div>
+              </div>
+              {isDoc && (
+                <div className="account-row">
+                  <div className="account-row-icon" style={{background:"var(--teal-bg)"}}>{IC.steth}</div>
+                  <div className="account-row-content">
+                    <div className="account-row-label">Specialty</div>
+                    <div className="account-row-value">{profileUser?.specialty || "—"}</div>
+                  </div>
+                </div>
+              )}
+              {profileData?.phone && (
+                <div className="account-row">
+                  <div className="account-row-icon" style={{background:"rgba(139,92,246,.08)"}}>{IC.phone}</div>
+                  <div className="account-row-content">
+                    <div className="account-row-label">Phone</div>
+                    <div className="account-row-value">{profileData.phone}</div>
+                  </div>
+                </div>
+              )}
+              <div className="account-row">
+                <div className="account-row-icon" style={{background:"rgba(236,72,153,.08)"}}>{IC.calendar}</div>
+                <div className="account-row-content">
+                  <div className="account-row-label">Joined</div>
+                  <div className="account-row-value">{joinedDate}</div>
+                </div>
+              </div>
+              <div className="account-row">
+                <div className="account-row-icon" style={{background:"rgba(34,197,94,.08)"}}>{IC.activity}</div>
+                <div className="account-row-content">
+                  <div className="account-row-label">Activity</div>
+                  <div className="account-row-value">{userPosts.length} posts · {profileUser?.followers||0} followers</div>
+                </div>
+              </div>
+            </div>
+
+            {isOwnProfile && (
+              <div style={{background:"linear-gradient(135deg,rgba(0,168,150,.06),rgba(26,115,232,.04))",borderRadius:16,border:"1px solid rgba(0,168,150,.2)",padding:"16px 20px",display:"flex",gap:14,alignItems:"center"}} className="fu s2">
+                <span style={{fontSize:24}}>💡</span>
+                <div style={{flex:1}}>
+                  <p style={{fontWeight:700,fontSize:13,color:"var(--teal2)",marginBottom:3}}>Keep your profile updated</p>
+                  <p style={{fontSize:12.5,color:"var(--text2)",lineHeight:1.5}}>Upload a profile picture and complete your details to build trust with the community.</p>
+                </div>
+                <button className="btn-p" onClick={()=>setShowEditModal(true)} style={{padding:"8px 16px",borderRadius:50,fontSize:12,flexShrink:0}}>
+                  {IC.edit} Edit
+                </button>
+              </div>
+            )}
+          </div>
         )}
         {activeTab==="saved"&&(
           savedPosts.length===0
@@ -943,6 +1248,14 @@ const ProfilePage = ({profileUserId, onHashtagClick}) => {
             ))
         )}
       </div>
+      {showEditModal && (
+        <EditProfileModal
+          profileUser={baseUser}
+          currentData={profileData}
+          onClose={()=>setShowEditModal(false)}
+          onSave={handleSaveProfile}
+        />
+      )}
     </div>
   );
 };
@@ -1293,7 +1606,7 @@ const OutbreakPage = () => {
 
       <div style={{marginTop:14,padding:"10px 14px",background:"rgba(26,115,232,.06)",border:"1px solid rgba(26,115,232,.2)",borderRadius:12,display:"flex",gap:8,alignItems:"flex-start"}}>
         {IC.alert}
-        <p style={{fontSize:11.5,color:"#1558b0",lineHeight:1.5}}>Data is simulated for demonstration. In production, this would aggregate anonymized symptom reports from CareCircle users to detect real outbreak patterns.</p>
+        <p style={{fontSize:11.5,color:"#1558b0",lineHeight:1.5}}>Data is simulated for demonstration. In production, this would aggregate anonymized symptom reports from Svasthya users to detect real outbreak patterns.</p>
       </div>
     </div>
   );
@@ -1480,15 +1793,35 @@ const MisinfoPage = () => {
 };
 
 /* ════════════════════════════════════════════════════════════════
-   LOGIN PAGE
+   LOGIN PAGE — Multi-step registration
 ════════════════════════════════════════════════════════════════ */
 const LoginPage = ({onLogin}) => {
+  const [mode, setMode] = useState("login"); // "login" | "register"
+  const [step, setStep] = useState(1); // 1=email/pw, 2=role, 3=details
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
+  const [name, setName] = useState("");
+  const [role, setRole] = useState(null); // "doctor" | "patient"
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const submit = async () => {
+  // Patient fields
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [bloodGroup, setBloodGroup] = useState("");
+  const [conditions, setConditions] = useState("");
+  const [medications, setMedications] = useState("");
+  const [anonDefault, setAnonDefault] = useState(false);
+
+  // Doctor fields
+  const [license, setLicense] = useState("");
+  const [specialty, setSpecialty] = useState("");
+  const [experience, setExperience] = useState("");
+  const [qualification, setQualification] = useState("");
+  const [hospital, setHospital] = useState("");
+  const [shortBio, setShortBio] = useState("");
+
+  const submitLogin = async () => {
     setLoading(true); setErr("");
     await new Promise(r=>setTimeout(r,700));
     const u = USERS.find(u=>u.email===email&&u.password===pw);
@@ -1496,54 +1829,288 @@ const LoginPage = ({onLogin}) => {
     else { setErr("Invalid email or password."); setLoading(false); }
   };
 
+  const submitRegister = async () => {
+    setLoading(true); setErr("");
+    await new Promise(r=>setTimeout(r,800));
+    const initials = name.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase()||"U";
+    const newUser = {
+      id: Date.now(),
+      name,
+      email,
+      password: pw,
+      role,
+      avatar: initials,
+      bio: role==="doctor" ? (shortBio||`${qualification}. ${specialty} specialist.`) : `Svasthya community member.`,
+      specialty: role==="doctor" ? specialty : undefined,
+      consultFee: role==="doctor" ? 500 : undefined,
+      followers: 0,
+      following: 0,
+      online: true,
+    };
+    onLogin(newUser);
+  };
+
+  const labelSt = {fontSize:11.5,fontWeight:700,color:"var(--text2)",fontFamily:"var(--font-b)",marginBottom:6,display:"block",textTransform:"uppercase",letterSpacing:".04em"};
+  const totalSteps = 3;
+  const progress = mode==="register" ? (step/totalSteps)*100 : 0;
+
   return (
     <div className="login-wrap">
       {[[{w:500,c:"rgba(0,168,150,0.12)",t:-80,l:-80},{w:400,c:"rgba(26,115,232,0.08)",b:-60,r:-60},{w:250,c:"rgba(245,158,11,0.06)",t:"40%",r:"25%"}]].flat().map((o,i)=>(
         <div key={i} style={{position:"absolute",width:o.w,height:o.w,borderRadius:"50%",background:`radial-gradient(circle,${o.c},transparent)`,top:o.t,left:o.l,bottom:o.b,right:o.r,animation:`orb ${10+i*3}s ease-in-out infinite`,pointerEvents:"none",animationDelay:`${i*3}s`}}/>
       ))}
-      <div className="login-card fu">
-        <div style={{textAlign:"center",marginBottom:32}}>
-          <div style={{width:60,height:60,background:"linear-gradient(135deg,#00a896,#007a6e)",borderRadius:20,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 16px",boxShadow:"0 12px 40px rgba(0,168,150,0.3)"}}>
-            <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-          </div>
-          <h1 style={{fontFamily:"var(--font-d)",fontSize:30,fontWeight:400,fontStyle:"italic",color:"var(--text)",letterSpacing:"-.01em"}}>CareCircle</h1>
-          <p style={{color:"var(--text3)",fontSize:13.5,marginTop:5}}>Community healthcare, together</p>
-        </div>
-        {err&&(
-          <div style={{background:"rgba(239,68,68,.07)",border:"1px solid rgba(239,68,68,.25)",color:"#dc2626",borderRadius:12,padding:"10px 14px",fontSize:13,marginBottom:16,display:"flex",alignItems:"center",gap:8}} className="fi">
-            {IC.alert}{err}
-          </div>
-        )}
-        <div style={{display:"flex",flexDirection:"column",gap:12}}>
-          <div>
-            <label style={{fontSize:11.5,fontWeight:700,color:"var(--text2)",fontFamily:"var(--font-b)",marginBottom:6,display:"block",textTransform:"uppercase",letterSpacing:".04em"}}>Email</label>
-            <input className="inp" type="email" value={email} onChange={e=>setEmail(e.target.value)}
-              placeholder="you@example.com" onKeyDown={e=>e.key==="Enter"&&submit()}/>
-          </div>
-          <div>
-            <label style={{fontSize:11.5,fontWeight:700,color:"var(--text2)",fontFamily:"var(--font-b)",marginBottom:6,display:"block",textTransform:"uppercase",letterSpacing:".04em"}}>Password</label>
-            <input className="inp" type="password" value={pw} onChange={e=>setPw(e.target.value)}
-              placeholder="••••••••" onKeyDown={e=>e.key==="Enter"&&submit()}/>
-          </div>
-          <button className="btn-p" onClick={submit} disabled={loading||!email||!pw}
-            style={{padding:"13px",borderRadius:50,fontSize:14,marginTop:6,width:"100%"}}>
-            {loading?<><Spinner/> Signing in…</>:"Sign In →"}
-          </button>
-        </div>
-        <div style={{marginTop:24,paddingTop:20,borderTop:"1px solid var(--border)"}}>
-          <p style={{textAlign:"center",fontSize:12.5,color:"var(--text3)",marginBottom:12,fontWeight:600}}>— DEMO ACCOUNTS —</p>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
-            {[{label:"🩺 Doctor",email:"priya@doc.com",pw:"1234"},{label:"🧑 Patient",email:"rahul@patient.com",pw:"1234"}].map(d=>(
-              <button key={d.email} onClick={()=>{setEmail(d.email);setPw(d.pw);}}
-                style={{padding:"10px 12px",borderRadius:12,border:"1.5px solid var(--border2)",background:"var(--surface2)",cursor:"pointer",transition:"all .18s",fontFamily:"var(--font-b)",fontSize:12.5,fontWeight:600,color:"var(--text2)"}}
-                onMouseEnter={e=>{e.currentTarget.style.borderColor="var(--teal)";e.currentTarget.style.color="var(--teal2)"}}
-                onMouseLeave={e=>{e.currentTarget.style.borderColor="var(--border2)";e.currentTarget.style.color="var(--text2)"}}>
-                <div>{d.label}</div>
-                <div style={{fontSize:10.5,marginTop:2,color:"var(--text3)"}}>{d.email}</div>
-              </button>
+      <div className="login-card fu" style={{maxWidth: mode==="register"&&step===3?480:440}}>
+        {/* Progress bar for registration */}
+        {mode==="register" && (
+          <div style={{display:"flex",gap:6,marginBottom:24}}>
+            {[1,2,3].map(s=>(
+              <div key={s} style={{flex:1,height:4,borderRadius:4,background:s<=step?"var(--teal)":"var(--border)",transition:"background .3s"}}/>
             ))}
           </div>
-        </div>
+        )}
+
+        {/* Back button for registration */}
+        {mode==="register" && step>1 && (
+          <button onClick={()=>setStep(step-1)} style={{background:"none",border:"none",cursor:"pointer",display:"flex",alignItems:"center",gap:6,fontSize:13,fontWeight:600,color:"var(--teal2)",fontFamily:"var(--font-b)",marginBottom:16,padding:0}}>
+            ← Back
+          </button>
+        )}
+
+        {/* LOGIN MODE */}
+        {mode==="login" && (
+          <>
+            <div style={{textAlign:"center",marginBottom:32}}>
+              <div style={{width:60,height:60,background:"linear-gradient(135deg,#00a896,#007a6e)",borderRadius:20,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 16px",boxShadow:"0 12px 40px rgba(0,168,150,0.3)"}}>
+                <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </div>
+              <h1 style={{fontFamily:"var(--font-d)",fontSize:30,fontWeight:400,fontStyle:"italic",color:"var(--text)",letterSpacing:"-.01em"}}>Svasthya</h1>
+              <p style={{color:"var(--text3)",fontSize:13.5,marginTop:5}}>Community healthcare, together</p>
+            </div>
+            {err&&(
+              <div style={{background:"rgba(239,68,68,.07)",border:"1px solid rgba(239,68,68,.25)",color:"#dc2626",borderRadius:12,padding:"10px 14px",fontSize:13,marginBottom:16,display:"flex",alignItems:"center",gap:8}} className="fi">
+                {IC.alert}{err}
+              </div>
+            )}
+            <div style={{display:"flex",flexDirection:"column",gap:12}}>
+              <div>
+                <label style={labelSt}>Email</label>
+                <input className="inp" type="email" value={email} onChange={e=>setEmail(e.target.value)}
+                  placeholder="you@example.com" onKeyDown={e=>e.key==="Enter"&&submit()}/>
+              </div>
+              <div>
+                <label style={labelSt}>Password</label>
+                <input className="inp" type="password" value={pw} onChange={e=>setPw(e.target.value)}
+                  placeholder="••••••••" onKeyDown={e=>e.key==="Enter"&&submitLogin()}/>
+              </div>
+              <button className="btn-p" onClick={submitLogin} disabled={loading||!email||!pw}
+                style={{padding:"13px",borderRadius:50,fontSize:14,marginTop:6,width:"100%"}}>
+                {loading?<><Spinner/> Signing in…</>:"Sign In →"}
+              </button>
+            </div>
+            <div style={{textAlign:"center",marginTop:18}}>
+              <p style={{fontSize:13,color:"var(--text3)"}}>Don't have an account? <button onClick={()=>{setMode("register");setStep(1);setErr("");}} style={{background:"none",border:"none",cursor:"pointer",color:"var(--teal2)",fontWeight:700,fontSize:13,fontFamily:"var(--font-b)"}}>Sign Up</button></p>
+            </div>
+            <div style={{marginTop:20,paddingTop:18,borderTop:"1px solid var(--border)"}}>
+              <p style={{textAlign:"center",fontSize:12.5,color:"var(--text3)",marginBottom:12,fontWeight:600}}>— DEMO ACCOUNTS —</p>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+                {[{label:"🩺 Doctor",email:"priya@doc.com",pw:"1234"},{label:"🧑 Patient",email:"rahul@patient.com",pw:"1234"}].map(d=>(
+                  <button key={d.email} onClick={()=>{setEmail(d.email);setPw(d.pw);}}
+                    style={{padding:"10px 12px",borderRadius:12,border:"1.5px solid var(--border2)",background:"var(--surface2)",cursor:"pointer",transition:"all .18s",fontFamily:"var(--font-b)",fontSize:12.5,fontWeight:600,color:"var(--text2)"}}
+                    onMouseEnter={e=>{e.currentTarget.style.borderColor="var(--teal)";e.currentTarget.style.color="var(--teal2)"}}
+                    onMouseLeave={e=>{e.currentTarget.style.borderColor="var(--border2)";e.currentTarget.style.color="var(--text2)"}}>
+                    <div>{d.label}</div>
+                    <div style={{fontSize:10.5,marginTop:2,color:"var(--text3)"}}>{d.email}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* REGISTER STEP 1: Name + Email + Password */}
+        {mode==="register" && step===1 && (
+          <>
+            <div style={{textAlign:"center",marginBottom:24}}>
+              <div style={{width:50,height:50,background:"linear-gradient(135deg,#00a896,#007a6e)",borderRadius:16,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 12px",boxShadow:"0 8px 24px rgba(0,168,150,0.3)"}}>
+                <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </div>
+              <h2 style={{fontFamily:"var(--font-d)",fontSize:24,fontWeight:400,fontStyle:"italic",color:"var(--text)"}}>Create Account</h2>
+              <p style={{color:"var(--text3)",fontSize:13,marginTop:4}}>Join the Svasthya community</p>
+            </div>
+            <div style={{display:"flex",flexDirection:"column",gap:12}}>
+              <div>
+                <label style={labelSt}>Full Name</label>
+                <input className="inp" value={name} onChange={e=>setName(e.target.value)} placeholder="e.g. Rahul Verma"/>
+              </div>
+              <div>
+                <label style={labelSt}>Email</label>
+                <input className="inp" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@example.com"/>
+              </div>
+              <div>
+                <label style={labelSt}>Password</label>
+                <input className="inp" type="password" value={pw} onChange={e=>setPw(e.target.value)} placeholder="••••••••"/>
+              </div>
+              <button className="btn-p" onClick={()=>{if(!name||!email||!pw){setErr("Please fill all fields");return;}setErr("");setStep(2);}} disabled={!name||!email||!pw}
+                style={{padding:"13px",borderRadius:50,fontSize:14,marginTop:6,width:"100%"}}>
+                Continue →
+              </button>
+            </div>
+            <div style={{textAlign:"center",marginTop:16}}>
+              <p style={{fontSize:13,color:"var(--text3)"}}>Already have an account? <button onClick={()=>{setMode("login");setErr("");}} style={{background:"none",border:"none",cursor:"pointer",color:"var(--teal2)",fontWeight:700,fontSize:13,fontFamily:"var(--font-b)"}}>Sign In</button></p>
+            </div>
+          </>
+        )}
+
+        {/* REGISTER STEP 2: Role selection */}
+        {mode==="register" && step===2 && (
+          <>
+            <div style={{textAlign:"center",marginBottom:24}}>
+              <h2 style={{fontFamily:"var(--font-d)",fontSize:24,fontWeight:400,fontStyle:"italic",color:"var(--text)"}}>I am a…</h2>
+              <p style={{color:"var(--text3)",fontSize:13,marginTop:4}}>Choose your role to personalize your experience</p>
+            </div>
+            <div style={{display:"flex",flexDirection:"column",gap:12}}>
+              {[
+                {id:"patient",emoji:"🧑",title:"Patient",desc:"Ask health questions, track symptoms, get community support"},
+                {id:"doctor",emoji:"🩺",title:"Doctor",desc:"Verify credentials, provide medical guidance, manage patients"},
+              ].map(r=>(
+                <button key={r.id} onClick={()=>{setRole(r.id);setStep(3);}}
+                  style={{display:"flex",alignItems:"center",gap:16,padding:"18px 20px",borderRadius:16,border:`2px solid ${role===r.id?"var(--teal)":"var(--border)"}`,background:role===r.id?"var(--teal-bg)":"var(--surface)",cursor:"pointer",transition:"all .2s",textAlign:"left"}}
+                  onMouseEnter={e=>{e.currentTarget.style.borderColor="var(--teal)";e.currentTarget.style.background="var(--teal-bg)"}}
+                  onMouseLeave={e=>{if(role!==r.id){e.currentTarget.style.borderColor="var(--border)";e.currentTarget.style.background="var(--surface)"}}}>
+                  <span style={{fontSize:32}}>{r.emoji}</span>
+                  <div>
+                    <p style={{fontWeight:800,fontSize:15,color:"var(--text)",fontFamily:"var(--font-b)"}}>{r.title}</p>
+                    <p style={{fontSize:12,color:"var(--text3)",marginTop:3,fontFamily:"var(--font-b)"}}>{r.desc}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* REGISTER STEP 3A: Patient Details */}
+        {mode==="register" && step===3 && role==="patient" && (
+          <>
+            <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:20}}>
+              <span style={{fontSize:28}}>🧑</span>
+              <div>
+                <h2 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,fontStyle:"italic",color:"var(--text)"}}>Patient Details</h2>
+                <p style={{color:"var(--text3)",fontSize:12,marginTop:2}}>Tell us a bit about yourself</p>
+              </div>
+            </div>
+            <div style={{background:"var(--teal-bg)",border:"1px solid rgba(0,168,150,.2)",borderRadius:12,padding:"10px 14px",marginBottom:18,display:"flex",alignItems:"center",gap:8}}>
+              <span style={{fontSize:13,fontWeight:600,color:"var(--text)"}}>{name}</span>
+              <span style={{fontSize:11,color:"var(--text3)"}}>· {email}</span>
+              <span className="badge-pat" style={{marginLeft:"auto"}}>Patient</span>
+            </div>
+            <div style={{display:"flex",flexDirection:"column",gap:14}}>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+                <div>
+                  <label style={labelSt}>Age</label>
+                  <input className="inp" type="number" value={age} onChange={e=>setAge(e.target.value)} placeholder="e.g. 28"/>
+                </div>
+                <div>
+                  <label style={labelSt}>Gender</label>
+                  <select className="inp" value={gender} onChange={e=>setGender(e.target.value)} style={{cursor:"pointer"}}>
+                    <option value="">Select...</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                    <option value="prefer_not">Prefer not to say</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label style={labelSt}>Blood Group (Optional)</label>
+                <select className="inp" value={bloodGroup} onChange={e=>setBloodGroup(e.target.value)} style={{cursor:"pointer"}}>
+                  <option value="">Don't know / prefer not to say</option>
+                  {["A+","A-","B+","B-","AB+","AB-","O+","O-"].map(bg=><option key={bg} value={bg}>{bg}</option>)}
+                </select>
+              </div>
+              <div>
+                <label style={labelSt}>Any Existing Conditions? (Optional)</label>
+                <input className="inp" value={conditions} onChange={e=>setConditions(e.target.value)} placeholder="e.g. Diabetes, Hypertension, Asthma..."/>
+              </div>
+              <div>
+                <label style={labelSt}>Current Medications (Optional)</label>
+                <input className="inp" value={medications} onChange={e=>setMedications(e.target.value)} placeholder="e.g. Metformin, Lisinopril..."/>
+              </div>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"14px 16px",background:"var(--surface2)",borderRadius:12,border:"1px solid var(--border)"}}>
+                <div>
+                  <p style={{fontWeight:700,fontSize:13.5,color:"var(--text)",fontFamily:"var(--font-b)"}}>Post anonymously by default</p>
+                  <p style={{fontSize:11.5,color:"var(--text3)",marginTop:2}}>Your name won't show on posts unless you choose</p>
+                </div>
+                <button onClick={()=>setAnonDefault(!anonDefault)} style={{width:44,height:24,borderRadius:12,border:"none",cursor:"pointer",background:anonDefault?"var(--teal)":"var(--border2)",transition:"background .2s",position:"relative",flexShrink:0}}>
+                  <div style={{width:18,height:18,borderRadius:"50%",background:"#fff",position:"absolute",top:3,left:anonDefault?23:3,transition:"left .2s",boxShadow:"0 1px 3px rgba(0,0,0,.2)"}}/>
+                </button>
+              </div>
+              <button className="btn-p" onClick={submitRegister} disabled={loading}
+                style={{padding:"14px",borderRadius:50,fontSize:14.5,marginTop:4,width:"100%"}}>
+                {loading?<><Spinner/> Creating account…</>:"Join Svasthya 💚"}
+              </button>
+            </div>
+          </>
+        )}
+
+        {/* REGISTER STEP 3B: Doctor Verification */}
+        {mode==="register" && step===3 && role==="doctor" && (
+          <>
+            <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:20}}>
+              <span style={{fontSize:28}}>🩺</span>
+              <div>
+                <h2 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,fontStyle:"italic",color:"var(--text)"}}>Doctor Verification</h2>
+                <p style={{color:"var(--text3)",fontSize:12,marginTop:2}}>Verify your medical credentials</p>
+              </div>
+            </div>
+            <div style={{background:"var(--teal-bg)",border:"1px solid rgba(0,168,150,.2)",borderRadius:12,padding:"10px 14px",marginBottom:12,display:"flex",alignItems:"center",gap:8}}>
+              <span style={{fontSize:13,fontWeight:600,color:"var(--text)"}}>{name}</span>
+              <span style={{fontSize:11,color:"var(--text3)"}}>· {email}</span>
+              <span className="badge-doc" style={{marginLeft:"auto"}}>{IC.shield} Doctor</span>
+            </div>
+            <div style={{background:"rgba(26,115,232,.06)",border:"1px solid rgba(26,115,232,.2)",borderRadius:12,padding:"12px 14px",marginBottom:18,display:"flex",gap:10,alignItems:"flex-start"}}>
+              <span style={{fontSize:16}}>🔵</span>
+              <div>
+                <p style={{fontWeight:700,fontSize:12.5,color:"#1558b0",fontFamily:"var(--font-b)"}}>Verified Doctor Badge</p>
+                <p style={{fontSize:11.5,color:"var(--text2)",marginTop:2,lineHeight:1.5}}>Once submitted, your credentials will be reviewed. Your posts will display the "✓ Verified" badge visible to all patients.</p>
+              </div>
+            </div>
+            <div style={{display:"flex",flexDirection:"column",gap:14}}>
+              <div>
+                <label style={labelSt}>Medical License Number</label>
+                <input className="inp" value={license} onChange={e=>setLicense(e.target.value)} placeholder="e.g. MCI-1234-5-2019"/>
+              </div>
+              <div>
+                <label style={labelSt}>Specialization</label>
+                <select className="inp" value={specialty} onChange={e=>setSpecialty(e.target.value)} style={{cursor:"pointer"}}>
+                  <option value="">Select your specialty...</option>
+                  {["General Physician","Cardiologist","Neurologist","Dermatologist","Orthopedic","Pediatrician","Psychiatrist","ENT Specialist","Gynecologist","Ophthalmologist","Pulmonologist","Gastroenterologist","Endocrinologist","Oncologist","Other"].map(s=><option key={s} value={s}>{s}</option>)}
+                </select>
+              </div>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+                <div>
+                  <label style={labelSt}>Years of Experience</label>
+                  <input className="inp" type="number" value={experience} onChange={e=>setExperience(e.target.value)} placeholder="e.g. 8"/>
+                </div>
+                <div>
+                  <label style={labelSt}>Qualification</label>
+                  <input className="inp" value={qualification} onChange={e=>setQualification(e.target.value)} placeholder="e.g. MBBS, MD"/>
+                </div>
+              </div>
+              <div>
+                <label style={labelSt}>Hospital / Clinic (Optional)</label>
+                <input className="inp" value={hospital} onChange={e=>setHospital(e.target.value)} placeholder="e.g. Apollo Hospital, Mumbai"/>
+              </div>
+              <div>
+                <label style={labelSt}>Short Bio (Optional)</label>
+                <textarea className="compose-area inp" value={shortBio} onChange={e=>setShortBio(e.target.value)} placeholder="Tell patients about your expertise..." rows={2} style={{resize:"none",padding:"10px 14px",fontSize:13}}/>
+              </div>
+              <button className="btn-p" onClick={submitRegister} disabled={loading||!license||!specialty}
+                style={{padding:"14px",borderRadius:50,fontSize:14.5,marginTop:4,width:"100%"}}>
+                {loading?<><Spinner/> Verifying…</>:"Join Svasthya 💚"}
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
@@ -1577,15 +2144,27 @@ const AppointmentModal = ({doctor, onClose}) => {
           </div>
           <div style={{display:"flex",alignItems:"center",gap:14}}>
             <Av init={doctor.avatar} sz={52} ring/>
-            <div>
+            <div style={{flex:1}}>
               <p style={{fontWeight:800,fontSize:16}}>{doctor.name}</p>
               <p style={{fontSize:13,opacity:.85}}>🩺 {doctor.specialty}</p>
             </div>
+            {doctor.consultFee && (
+              <div style={{background:"rgba(255,255,255,.18)",backdropFilter:"blur(8px)",borderRadius:14,padding:"8px 14px",textAlign:"center",border:"1px solid rgba(255,255,255,.25)"}}>
+                <p style={{fontSize:10,fontWeight:700,opacity:.8,textTransform:"uppercase",letterSpacing:".05em"}}>Consult Fee</p>
+                <p style={{fontSize:18,fontWeight:800}}>₹{doctor.consultFee}</p>
+              </div>
+            )}
           </div>
         </div>
 
         {!confirmed ? (
           <div style={{padding:"24px 28px"}}>
+            {doctor.consultFee && (
+              <div style={{display:"flex",alignItems:"center",gap:8,padding:"10px 14px",background:"rgba(0,168,150,.06)",border:"1px solid rgba(0,168,150,.18)",borderRadius:12,marginBottom:14}}>
+                <span style={{fontSize:16}}>💰</span>
+                <p style={{fontSize:12.5,color:"var(--teal2)",fontWeight:600}}>Consultation fee: <strong>₹{doctor.consultFee}</strong> per session</p>
+              </div>
+            )}
             <p style={{fontSize:12,fontWeight:700,color:"var(--text3)",textTransform:"uppercase",letterSpacing:".05em",marginBottom:14}}>Available Slots — Tomorrow</p>
             <div style={{display:"flex",flexDirection:"column",gap:10}}>
               {slots.map(s=>(
@@ -1845,7 +2424,7 @@ export default function App() {
   const [page, setPage] = useState("feed");
   const [posts, setPosts] = useState(()=>{
     try {
-      const saved = localStorage.getItem("carecircle_posts");
+      const saved = localStorage.getItem("svasthya_posts");
       return saved ? JSON.parse(saved) : ALL_POSTS_INIT;
     } catch { return ALL_POSTS_INIT; }
   });
@@ -1853,10 +2432,85 @@ export default function App() {
   const [searchTag, setSearchTag] = useState(null);
   const [appointmentDoc, setAppointmentDoc] = useState(null);
 
+  // Follow state
+  const [followedUsers, setFollowedUsers] = useState(()=>{
+    try {
+      const saved = localStorage.getItem("svasthya_follows");
+      return saved ? JSON.parse(saved) : [];
+    } catch { return []; }
+  });
+
+  // Theme state
+  const [theme, setTheme] = useState(()=>{
+    try { return localStorage.getItem("svasthya_theme") || "light"; } catch { return "light"; }
+  });
+
+  // Apply theme class to root
+  useEffect(()=>{
+    document.documentElement.classList.toggle("dark", theme==="dark");
+    try { localStorage.setItem("svasthya_theme", theme); } catch {}
+  },[theme]);
+
+  // Save follows
+  useEffect(()=>{
+    try { localStorage.setItem("svasthya_follows", JSON.stringify(followedUsers)); } catch {}
+  },[followedUsers]);
+
+  const toggleFollow = useCallback((userId) => {
+    setFollowedUsers(prev => prev.includes(userId) ? prev.filter(id=>id!==userId) : [...prev, userId]);
+  },[]);
+
+  const isFollowing = useCallback((userId) => followedUsers.includes(userId),[followedUsers]);
+
+  const toggleTheme = useCallback(() => setTheme(t => t==="dark"?"light":"dark"),[]);
+
+  // Profile data (pics, editable fields) stored in localStorage per user
+  const [profileDataMap, setProfileDataMap] = useState(()=>{
+    try {
+      const saved = localStorage.getItem("svasthya_profiles");
+      return saved ? JSON.parse(saved) : {};
+    } catch { return {}; }
+  });
+
   // Save posts to LocalStorage on change
   useEffect(()=>{
-    try { localStorage.setItem("carecircle_posts", JSON.stringify(posts)); } catch {}
+    try { localStorage.setItem("svasthya_posts", JSON.stringify(posts)); } catch {}
   },[posts]);
+
+  // Save profile data to localStorage on change
+  useEffect(()=>{
+    try { localStorage.setItem("svasthya_profiles", JSON.stringify(profileDataMap)); } catch {}
+  },[profileDataMap]);
+
+  const getProfileData = useCallback((userId) => {
+    return profileDataMap[userId] || {};
+  },[profileDataMap]);
+
+  const updateProfile = useCallback((userId, data) => {
+    setProfileDataMap(prev => ({...prev, [userId]: {...(prev[userId]||{}), ...data}}));
+    // Sync name/bio changes into authUser so sidebar & new posts reflect them
+    if (data.name || data.bio) {
+      setAuthUser(prev => {
+        if (!prev || prev.id !== userId) return prev;
+        const updated = {...prev};
+        if (data.name) updated.name = data.name;
+        if (data.bio) updated.bio = data.bio;
+        return updated;
+      });
+    }
+    // Sync name change into all existing posts & comments by this user
+    if (data.name) {
+      setPosts(ps => ps.map(p => {
+        let post = p.userId === userId ? {...p, userName: data.name} : p;
+        if (post.comments?.some(c => c.userId === userId)) {
+          post = {...post, comments: post.comments.map(c =>
+            c.userId === userId ? {...c, userName: data.name} : c
+          )};
+        }
+        return post;
+      }));
+    }
+  },[]);
 
   const toggleLike = useCallback((postId) => {
     setPosts(ps=>ps.map(p=>p.id!==postId?p:{...p,liked:!p.liked,likes:p.liked?p.likes-1:p.likes+1}));
@@ -1899,7 +2553,7 @@ export default function App() {
     if(doc) setAppointmentDoc(doc);
   };
 
-  const ctx = { user:authUser, posts, toggleLike, toggleSave, addComment, addPost, logout, bookAppointment };
+  const ctx = { user:authUser, posts, toggleLike, toggleSave, addComment, addPost, logout, bookAppointment, getProfileData, updateProfile, toggleFollow, isFollowing, theme, toggleTheme };
 
   if(!authUser) return (
     <>
