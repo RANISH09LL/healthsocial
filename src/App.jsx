@@ -5,296 +5,314 @@ import { DUMMY_POSTS, SYMPTOM_REPORTS } from "./dummyPosts.js";
    GLOBAL CSS
 ════════════════════════════════════════════════════════════════ */
 const CSS = `
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap');
-
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif;}
 
 :root{
-  --bg:#f7f8fa;
+  --bg:#f8fafc;
   --surface:#ffffff;
-  --surface2:#f2f4f7;
-  --border:#e4e8ef;
-  --border2:#d0d7e3;
-  --teal:#00a896;
-  --teal2:#007a6e;
-  --teal-bg:rgba(0,168,150,0.08);
-  --teal-bg2:rgba(0,168,150,0.14);
-  --blue:#1a73e8;
-  --coral:#ff5c5c;
+  --surface2:#f1f5f9;
+  --border:#e2e8f0;
+  --border2:#cbd5e1;
+  --teal:#3b82f6; /* Changing primary color to a premium tech blue */
+  --teal2:#2563eb;
+  --teal-bg:rgba(59,130,246,0.08);
+  --teal-bg2:rgba(59,130,246,0.14);
+  --blue:#6366f1;
+  --coral:#ef4444;
   --gold:#f59e0b;
-  --text:#0d1117;
-  --text2:#5a6478;
-  --text3:#9aa3b2;
-  --font-d:'Instrument Serif',Georgia,serif;
-  --font-b:'Manrope',sans-serif;
-  --r:14px;
-  --r2:20px;
-  --r3:28px;
-  --shadow:0 2px 12px rgba(0,0,0,0.07),0 1px 3px rgba(0,0,0,0.05);
-  --shadow2:0 8px 32px rgba(0,0,0,0.1),0 2px 8px rgba(0,0,0,0.06);
-  --shadow3:0 24px 64px rgba(0,0,0,0.14),0 4px 16px rgba(0,0,0,0.07);
-  --bg-blur:rgba(247,248,250,0.9);
-  --tip-card-bg:rgba(255,255,255,0.6);
-  --disclaimer-text:#92400e;
+  --text:#0f172a;
+  --text2:#475569;
+  --text3:#94a3b8;
+  --font-d:'Outfit',sans-serif; /* Moving away from serif to a modern geometric sans */
+  --font-b:'Inter',sans-serif;
+  --r:16px;
+  --r2:24px;
+  --r3:32px;
+  --shadow:0 4px 20px rgba(0,0,0,0.03),0 1px 3px rgba(0,0,0,0.02);
+  --shadow2:0 10px 40px rgba(0,0,0,0.06),0 4px 12px rgba(0,0,0,0.03);
+  --shadow3:0 30px 80px rgba(0,0,0,0.1),0 10px 30px rgba(0,0,0,0.04);
+  --bg-blur:rgba(255,255,255,0.8);
+  --tip-card-bg:rgba(255,255,255,0.8);
+  --disclaimer-text:#c2410c;
 }
 
-html,body{height:100%;width:100%;margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--font-b);-webkit-font-smoothing:antialiased}
+html,body{height:100%;width:100%;margin:0;padding:0;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
 #root{height:100%;width:100%}
 
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:6px}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes scaleIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}
-@keyframes slideLeft{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes heartPop{0%{transform:scale(1)}40%{transform:scale(1.35)}70%{transform:scale(0.9)}100%{transform:scale(1)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@keyframes ripple{0%{transform:scale(0);opacity:.4}100%{transform:scale(2.5);opacity:0}}
+@keyframes heartPop{0%{transform:scale(1)}40%{transform:scale(1.4)}70%{transform:scale(0.85)}100%{transform:scale(1)}}
 @keyframes shimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
-@keyframes orb{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.08)}66%{transform:translate(-25px,20px) scale(.94)}}
-@keyframes notifBounce{0%{transform:scale(0) rotate(-15deg)}60%{transform:scale(1.2) rotate(3deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes notifBounce{0%{transform:scale(0) rotate(-15deg)}60%{transform:scale(1.3) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
 
-.fu{animation:fadeUp .45s cubic-bezier(.22,1,.36,1) both}
-.fi{animation:fadeIn .3s ease both}
-.si{animation:scaleIn .35s cubic-bezier(.22,1,.36,1) both}
-.sl{animation:slideLeft .4s cubic-bezier(.22,1,.36,1) both}
-.s1{animation-delay:.04s}.s2{animation-delay:.08s}.s3{animation-delay:.12s}
-.s4{animation-delay:.16s}.s5{animation-delay:.20s}.s6{animation-delay:.24s}
+.fu{animation:fadeUp .6s cubic-bezier(0.16, 1, 0.3, 1) both}
+.fi{animation:fadeIn .4s ease both}
+.si{animation:scaleIn .5s cubic-bezier(0.16, 1, 0.3, 1) both}
+.sl{animation:slideLeft .5s cubic-bezier(0.16, 1, 0.3, 1) both}
+.s1{animation-delay:.05s}.s2{animation-delay:.10s}.s3{animation-delay:.15s}
+.s4{animation-delay:.20s}.s5{animation-delay:.25s}.s6{animation-delay:.30s}
 
 /* ── Layout shells ── */
 .app-shell{display:flex;height:100vh;overflow:hidden}
-.left-rail{width:260px;flex-shrink:0;border-right:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;overflow-y:auto;z-index:10}
+.left-rail{width:280px;flex-shrink:0;border-right:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;overflow-y:auto;z-index:10;padding-top:10px}
 .center-col{flex:1;overflow-y:auto;min-width:0}
-.right-rail{width:300px;flex-shrink:0;border-left:1px solid var(--border);background:var(--surface);overflow-y:auto;overflow-x:hidden;padding:20px 16px}
+.right-rail{width:320px;flex-shrink:0;border-left:1px solid var(--border);background:var(--surface);overflow-y:auto;overflow-x:hidden;padding:24px 20px}
 
 /* ── Nav items ── */
-.nav-item{display:flex;align-items:center;gap:13px;padding:11px 16px;border-radius:var(--r);font-size:14.5px;font-weight:600;color:var(--text2);cursor:pointer;border:none;background:transparent;width:100%;text-align:left;transition:all .18s;position:relative;font-family:var(--font-b)}
-.nav-item:hover{background:var(--teal-bg);color:var(--teal)}
-.nav-item.active{background:var(--teal-bg2);color:var(--teal)}
+.nav-item{display:flex;align-items:center;gap:14px;padding:12px 18px;border-radius:14px;font-size:15px;font-weight:600;color:var(--text2);cursor:pointer;border:none;background:transparent;width:100%;text-align:left;transition:all .25s ease;position:relative;}
+.nav-item:hover{background:var(--surface2);color:var(--text);transform:translateX(4px)}
+.nav-item.active{background:var(--teal-bg2);color:var(--teal);font-weight:700}
 .nav-item.active .ni-dot{display:block}
-.ni-dot{display:none;position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:22px;background:var(--teal);border-radius:0 3px 3px 0}
+.ni-dot{display:none;position:absolute;left:-8px;top:50%;transform:translateY(-50%);width:4px;height:24px;background:var(--teal);border-radius:0 4px 4px 0}
 
 /* ── Post cards ── */
-.post-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:18px 20px;transition:all .22s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden}
-.post-card:hover{border-color:rgba(0,168,150,0.25);box-shadow:var(--shadow2);transform:translateY(-1px)}
-.post-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,168,150,0.02),transparent);pointer-events:none;opacity:0;transition:.3s}
-.post-card:hover::after{opacity:1}
+.post-card{background:var(--surface);border:1px solid var(--border);border-radius:28px;padding:24px;transition:all .3s cubic-bezier(0.16, 1, 0.3, 1);position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.post-card:hover{border-color:rgba(59,130,246,0.3);box-shadow:var(--shadow2);transform:translateY(-2px)}
 
 /* ── Action buttons ── */
-.action-btn{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:50px;border:none;background:transparent;cursor:pointer;font-size:12.5px;font-weight:600;font-family:var(--font-b);color:var(--text3);transition:all .18s;position:relative;overflow:hidden}
-.action-btn:hover{background:var(--teal-bg);color:var(--teal)}
-.action-btn.liked{color:var(--coral)}
+.action-btn{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:50px;border:none;background:transparent;cursor:pointer;font-size:13px;font-weight:600;color:var(--text3);transition:all .2s;position:relative;overflow:hidden}
+.action-btn:hover{background:var(--surface2);color:var(--text)}
+.action-btn.liked{color:var(--coral);background:rgba(239,68,68,0.1)}
 .action-btn.liked svg{fill:var(--coral)}
-.action-btn.saved{color:var(--gold)}
+.action-btn.saved{color:var(--gold);background:rgba(245,158,11,0.1)}
 
 /* ── Primary button ── */
-.btn-p{background:linear-gradient(135deg,#00a896,#007a6e);color:#fff;border:none;cursor:pointer;font-family:var(--font-b);font-weight:700;font-size:13.5px;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:all .2s cubic-bezier(.22,1,.36,1);border-radius:50px;letter-spacing:.01em}
-.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,168,150,0.35)}
-.btn-p:active{transform:translateY(0)}
-.btn-p:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-p{background:linear-gradient(135deg,var(--teal),var(--teal2));color:#fff;border:none;cursor:pointer;font-weight:600;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .3s cubic-bezier(0.16, 1, 0.3, 1);border-radius:50px;padding:12px 24px;box-shadow:0 10px 20px rgba(59,130,246,0.2)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(59,130,246,0.3)}
+.btn-p:active{transform:translateY(0);box-shadow:0 4px 10px rgba(59,130,246,0.2)}
+.btn-p:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
 
 /* ── Ghost button ── */
-.btn-g{background:transparent;border:1.5px solid var(--border2);color:var(--text2);cursor:pointer;font-family:var(--font-b);font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:6px;border-radius:50px;transition:all .18s;padding:7px 16px}
-.btn-g:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-bg)}
+.btn-g{background:var(--surface);border:1px solid var(--border2);color:var(--text2);cursor:pointer;font-weight:600;font-size:13.5px;display:inline-flex;align-items:center;gap:8px;border-radius:50px;transition:all .2s;padding:10px 20px;box-shadow:0 2px 4px rgba(0,0,0,0.02)}
+.btn-g:hover{border-color:var(--border);color:var(--text);background:var(--surface2);box-shadow:0 4px 12px rgba(0,0,0,0.05)}
 
 /* ── Input ── */
-.inp{width:100%;background:var(--surface2);border:1.5px solid var(--border);color:var(--text);font-family:var(--font-b);font-size:14px;outline:none;transition:all .2s;border-radius:12px;padding:12px 14px}
+.inp{width:100%;background:var(--surface2);border:1px solid transparent;color:var(--text);font-size:15px;outline:none;transition:all .25s ease;border-radius:16px;padding:14px 18px}
 .inp::placeholder{color:var(--text3)}
-.inp:focus{border-color:var(--teal);background:#fff;box-shadow:0 0 0 3px rgba(0,168,150,0.1)}
+.inp:focus{border-color:var(--teal);background:var(--surface);box-shadow:0 0 0 4px rgba(59,130,246,0.1)}
 
 /* ── Badge ── */
-.badge-doc{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,rgba(0,168,150,.1),rgba(26,115,232,.07));border:1px solid rgba(0,168,150,0.25);color:var(--teal2);padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;font-family:var(--font-b);letter-spacing:.04em;text-transform:uppercase}
-.badge-pat{display:inline-flex;align-items:center;gap:4px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);color:#b45309;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;font-family:var(--font-b);letter-spacing:.04em;text-transform:uppercase}
+.badge-doc{display:inline-flex;align-items:center;gap:6px;background:var(--teal-bg2);border:1px solid transparent;color:var(--teal2);padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.badge-pat{display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,.1);border:1px solid transparent;color:#d97706;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
 
 /* ── Tag ── */
-.tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11.5px;font-weight:600;font-family:var(--font-b);cursor:pointer;transition:all .15s}
-.tag-t{background:rgba(0,168,150,.08);color:var(--teal2);border:1px solid rgba(0,168,150,.18)}
-.tag-t:hover{background:rgba(0,168,150,.15)}
-.tag-b{background:rgba(26,115,232,.07);color:#1558b0;border:1px solid rgba(26,115,232,.18)}
-.tag-c{background:rgba(255,92,92,.07);color:#c03030;border:1px solid rgba(255,92,92,.18)}
-.tag-g{background:rgba(90,100,120,.07);color:var(--text2);border:1px solid var(--border)}
+.tag{display:inline-flex;align-items:center;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.tag-t{background:var(--surface2);color:var(--teal2);border:1px solid transparent}
+.tag-t:hover{background:var(--teal-bg2);color:var(--teal2)}
+.tag-b{background:var(--surface2);color:#1558b0;border:1px solid transparent}
+.tag-b:hover{background:rgba(26,115,232,.1)}
+.tag-c{background:var(--surface2);color:#c03030;border:1px solid transparent}
+.tag-g{background:var(--surface2);color:var(--text2);border:1px solid transparent}
 
 /* ── Modal ── */
-.overlay{position:fixed;inset:0;background:rgba(13,17,23,0.5);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;z-index:300;padding:16px;animation:fadeIn .2s ease}
-.modal-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r3);width:100%;max-width:540px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow3);animation:scaleIn .3s cubic-bezier(.22,1,.36,1)}
+.overlay{position:fixed;inset:0;background:rgba(15,23,42,0.4);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:300;padding:20px;animation:fadeIn .3s ease}
+.modal-box{background:var(--surface);border:1px solid rgba(255,255,255,0.1);border-radius:32px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow3);animation:scaleIn .4s cubic-bezier(0.16, 1, 0.3, 1)}
 
 /* ── Composer ── */
-.composer{background:var(--surface);border:1px solid var(--border);padding:18px 20px;position:sticky;top:0;z-index:20;border-top:none;border-radius:0 0 var(--r2) var(--r2)}
+.composer{background:rgba(255,255,255,0.7);backdrop-filter:blur(20px);border:1px solid var(--border);padding:24px;position:sticky;top:0;z-index:20;border-top:none;border-radius:0 0 32px 32px;box-shadow:0 10px 30px rgba(0,0,0,0.02)}
 
 /* ── Trend card ── */
-.trend-card{padding:12px 14px;border-radius:var(--r);background:var(--surface2);border:1px solid var(--border);transition:all .18s;cursor:pointer}
-.trend-card:hover{border-color:var(--teal);background:var(--teal-bg);transform:translateX(3px)}
+.trend-card{padding:16px;border-radius:20px;background:var(--surface);border:1px solid var(--border);transition:all .25s ease;cursor:pointer;box-shadow:var(--shadow)}
+.trend-card:hover{border-color:rgba(59,130,246,0.3);box-shadow:var(--shadow2);transform:translateY(-2px)}
 
 /* ── Profile header ── */
-.profile-cover{height:140px;background:linear-gradient(135deg,#00a896 0%,#007a6e 40%,#1a73e8 100%);position:relative;overflow:hidden}
-.profile-cover::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10-10-4.5-10-10z'/%3E%3C/g%3E%3C/svg%3E")}
+.profile-cover{height:180px;background:linear-gradient(135deg,var(--teal) 0%,#8b5cf6 100%);position:relative;overflow:hidden}
+.profile-cover::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
 
 /* ── Skeleton ── */
-.skeleton{background:linear-gradient(90deg,var(--surface2) 0%,var(--border) 50%,var(--surface2) 100%);background-size:400px 100%;animation:shimmer 1.4s infinite;border-radius:6px}
+.skeleton{background:linear-gradient(90deg,var(--surface2) 0%,var(--border) 50%,var(--surface2) 100%);background-size:400px 100%;animation:shimmer 1.5s infinite;border-radius:8px}
 
 /* ── Search page ── */
-.hashtag-pill{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:50px;font-size:13px;font-weight:700;font-family:var(--font-b);cursor:pointer;border:1.5px solid var(--border);background:var(--surface);transition:all .18s;color:var(--text2)}
-.hashtag-pill:hover,.hashtag-pill.active{background:var(--teal);color:#fff;border-color:var(--teal);box-shadow:0 4px 16px rgba(0,168,150,.3)}
+.hashtag-pill{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:50px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid transparent;background:var(--surface2);transition:all .25s ease;color:var(--text2)}
+.hashtag-pill:hover{background:var(--surface);border-color:var(--border);color:var(--text);box-shadow:var(--shadow)}
+.hashtag-pill.active{background:var(--text);color:var(--surface);box-shadow:0 8px 24px rgba(0,0,0,0.15)}
 
 /* ── Login ── */
-.login-wrap{min-height:100vh;width:100%;background:linear-gradient(135deg,#f0fffe 0%,#e8f5f4 30%,#eef3ff 70%,#f5f0ff 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:16px;box-sizing:border-box}
-.login-card{background:#fff;border:1px solid var(--border);border-radius:var(--r3);padding:44px 40px;width:100%;max-width:440px;box-shadow:var(--shadow3);position:relative;z-index:1;box-sizing:border-box}
+.login-wrap{min-height:100vh;width:100%;background:linear-gradient(135deg,#f8fafc 0%,#f1f5f9 50%,#e2e8f0 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:20px;box-sizing:border-box}
+.login-card{background:rgba(255,255,255,0.9);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.5);border-radius:32px;padding:50px 48px;width:100%;max-width:480px;box-shadow:var(--shadow3);position:relative;z-index:1;box-sizing:border-box}
 
 /* ── Composer textarea ── */
-.compose-area{border:none;outline:none;resize:none;background:transparent;font-family:var(--font-b);font-size:15px;color:var(--text);width:100%;line-height:1.6}
+.compose-area{border:none;outline:none;resize:none;background:transparent;font-size:16px;color:var(--text);width:100%;line-height:1.7}
 .compose-area::placeholder{color:var(--text3)}
 
 /* ── Responsive ── */
 @media(max-width:900px){.right-rail{display:none}}
-@media(max-width:680px){.left-rail{width:60px}.nav-item span{display:none}.nav-logo-text{display:none}}
+@media(max-width:680px){.left-rail{width:80px}.nav-item span{display:none}.nav-logo-text{display:none}}
 
 /* ── Doctor only banner ── */
-.doc-banner{background:linear-gradient(135deg,rgba(0,168,150,.06),rgba(26,115,232,.04));border:1px solid rgba(0,168,150,.2);border-radius:var(--r);padding:14px 18px;display:flex;align-items:center;gap:12px}
+.doc-banner{background:linear-gradient(135deg,rgba(59,130,246,0.06),rgba(99,102,241,0.04));border:1px solid rgba(59,130,246,0.15);border-radius:24px;padding:18px 24px;display:flex;align-items:center;gap:16px}
 
 /* ── Notification dot ── */
-.notif{width:8px;height:8px;background:var(--coral);border-radius:50%;border:2px solid #fff;position:absolute;top:8px;right:10px;animation:notifBounce .4s cubic-bezier(.22,1,.36,1)}
+.notif{width:10px;height:10px;background:var(--coral);border-radius:50%;border:2px solid var(--surface);position:absolute;top:6px;right:6px;animation:notifBounce .5s cubic-bezier(0.16, 1, 0.3, 1);box-shadow:0 2px 6px rgba(239,68,68,0.4)}
 
 /* ── Comment thread ── */
-.thread-line{position:absolute;left:19px;top:44px;bottom:0;width:2px;background:var(--border)}
-.comment-item{position:relative;padding-left:44px;margin-bottom:14px}
+.thread-line{position:absolute;left:21px;top:48px;bottom:-10px;width:2px;background:var(--border)}
+.comment-item{position:relative;padding-left:48px;margin-bottom:20px}
 
 /* ── AI Feature Cards ── */
 @keyframes progressFill{from{width:0}to{width:var(--pw,0%)}}
-@keyframes pulseGlow{0%,100%{opacity:1;box-shadow:0 0 6px rgba(239,68,68,0.4)}50%{opacity:.7;box-shadow:0 0 16px rgba(239,68,68,0.7)}}
-@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes pulseGlow{0%,100%{opacity:1;box-shadow:0 0 10px rgba(99,102,241,0.4)}50%{opacity:.6;box-shadow:0 0 20px rgba(99,102,241,0.6)}}
 
-.ai-page{max-width:660px;margin:0 auto;padding:0 16px 80px}
-.ai-page-header{position:sticky;top:0;z-index:19;background:var(--bg-blur);backdrop-filter:blur(12px);padding:14px 0 10px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.ai-page{max-width:700px;margin:0 auto;padding:0 20px 80px}
+.ai-page-header{position:sticky;top:0;z-index:19;background:rgba(248,250,252,0.85);backdrop-filter:blur(20px);padding:24px 0 16px;border-bottom:1px solid var(--border);margin-bottom:24px}
 
-.ai-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:22px 24px;margin-bottom:14px;transition:all .22s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden}
-.ai-card:hover{border-color:rgba(0,168,150,0.2);box-shadow:var(--shadow)}
-.ai-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;border-radius:4px 0 0 4px}
-.ai-card.accent-teal::before{background:linear-gradient(180deg,#00a896,#007a6e)}
-.ai-card.accent-blue::before{background:linear-gradient(180deg,#1a73e8,#1558b0)}
-.ai-card.accent-coral::before{background:linear-gradient(180deg,#ff5c5c,#c03030)}
-.ai-card.accent-gold::before{background:linear-gradient(180deg,#f59e0b,#d97706)}
-.ai-card.accent-purple::before{background:linear-gradient(180deg,#8b5cf6,#6d28d9)}
+.ai-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:28px 32px;margin-bottom:16px;transition:all .3s cubic-bezier(0.16, 1, 0.3, 1);position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.ai-card:hover{border-color:rgba(59,130,246,0.2);box-shadow:var(--shadow2);transform:translateY(-2px)}
+.ai-card::before{content:'';position:absolute;top:0;left:0;width:6px;height:100%;border-radius:6px 0 0 6px}
+.ai-card.accent-teal::before{background:linear-gradient(180deg,var(--teal),var(--teal2))}
+.ai-card.accent-blue::before{background:linear-gradient(180deg,var(--blue),#4f46e5)}
+.ai-card.accent-coral::before{background:linear-gradient(180deg,var(--coral),#dc2626)}
+.ai-card.accent-gold::before{background:linear-gradient(180deg,var(--gold),#d97706)}
+.ai-card.accent-purple::before{background:linear-gradient(180deg,#8b5cf6,#7c3aed)}
 
-.symptom-chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
-.symptom-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:50px;font-size:13px;font-weight:600;font-family:var(--font-b);background:var(--teal-bg2);color:var(--teal2);border:1px solid rgba(0,168,150,.25);animation:scaleIn .25s cubic-bezier(.22,1,.36,1)}
-.symptom-chip button{background:none;border:none;cursor:pointer;color:var(--teal2);display:flex;align-items:center;padding:0;opacity:.6;transition:opacity .15s}
+.symptom-chips{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.symptom-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:50px;font-size:14px;font-weight:600;background:var(--surface2);color:var(--text);border:1px solid transparent;animation:scaleIn .3s cubic-bezier(0.16, 1, 0.3, 1);transition:all .2s}
+.symptom-chip:hover{background:var(--teal-bg2);color:var(--teal)}
+.symptom-chip button{background:none;border:none;cursor:pointer;color:inherit;display:flex;align-items:center;padding:0;opacity:.5;transition:opacity .2s}
 .symptom-chip button:hover{opacity:1}
 
-.symptom-input-row{display:flex;gap:8px;align-items:center}
-.symptom-input-row .inp{flex:1;border-radius:50px;padding:10px 18px;font-size:13.5px}
+.symptom-input-row{display:flex;gap:12px;align-items:center}
+.symptom-input-row .inp{flex:1;border-radius:50px;padding:14px 24px;font-size:15px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow)}
+.symptom-input-row .inp:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(59,130,246,0.1)}
 
-.progress-bar{height:10px;background:var(--surface2);border-radius:6px;overflow:hidden;position:relative}
-.progress-fill{height:100%;border-radius:6px;animation:progressFill .8s cubic-bezier(.22,1,.36,1) both;transition:width .4s}
+.progress-bar{height:12px;background:var(--surface2);border-radius:8px;overflow:hidden;position:relative}
+.progress-fill{height:100%;border-radius:8px;animation:progressFill 1s cubic-bezier(0.16, 1, 0.3, 1) both;transition:width .5s}
 
-.region-row{padding:14px 16px;border-radius:var(--r);transition:all .18s;cursor:default;border:1px solid transparent}
-.region-row:hover{background:var(--teal-bg);border-color:rgba(0,168,150,.15);transform:translateX(3px)}
+.region-row{padding:16px 20px;border-radius:16px;transition:all .25s ease;cursor:default;border:1px solid transparent;background:var(--surface)}
+.region-row:hover{background:var(--surface2);border-color:var(--border);transform:translateX(4px);box-shadow:var(--shadow)}
 
-.pulse-dot{width:10px;height:10px;border-radius:50%;background:#ef4444;animation:pulseGlow 1.5s ease-in-out infinite;flex-shrink:0}
+.pulse-dot{width:12px;height:12px;border-radius:50%;background:var(--blue);animation:pulseGlow 2s ease-in-out infinite;flex-shrink:0}
 
-.alert-banner{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:14px;font-size:13.5px;font-weight:600;font-family:var(--font-b);animation:scaleIn .35s cubic-bezier(.22,1,.36,1);margin-bottom:12px}
-.alert-banner.danger{background:rgba(239,68,68,.07);border:1.5px solid rgba(239,68,68,.3);color:#dc2626}
-.alert-banner.safe{background:rgba(34,197,94,.06);border:1.5px solid rgba(34,197,94,.25);color:#15803d}
+.alert-banner{display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:16px;font-size:14px;font-weight:600;animation:scaleIn .4s cubic-bezier(0.16, 1, 0.3, 1);margin-bottom:16px}
+.alert-banner.danger{background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.2);color:#b91c1c}
+.alert-banner.safe{background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.2);color:#15803d}
 
-.ai-result-box{background:linear-gradient(135deg,rgba(0,168,150,.04),rgba(26,115,232,.03));border:1.5px solid rgba(0,168,150,.2);border-radius:var(--r2);padding:22px 24px;animation:fadeUp .45s cubic-bezier(.22,1,.36,1)}
+.ai-result-box{background:var(--surface);border:1px solid var(--border);border-radius:28px;padding:32px;animation:fadeUp .5s cubic-bezier(0.16, 1, 0.3, 1);box-shadow:var(--shadow2)}
 
-.misinfo-col{flex:1;min-width:0;padding:16px;border-radius:16px;border:1.5px solid var(--border)}
-.misinfo-col.bad{background:rgba(239,68,68,.04);border-color:rgba(239,68,68,.2)}
-.misinfo-col.good{background:rgba(0,168,150,.04);border-color:rgba(0,168,150,.2)}
-.misinfo-col.case{background:rgba(26,115,232,.04);border-color:rgba(26,115,232,.2)}
+.misinfo-col{flex:1;min-width:0;padding:24px;border-radius:24px;border:1px solid transparent;background:var(--surface2)}
+.misinfo-col.bad{background:rgba(239,68,68,.03);border-color:rgba(239,68,68,.15)}
+.misinfo-col.good{background:rgba(34,197,94,.03);border-color:rgba(34,197,94,.15)}
+.misinfo-col.case{background:rgba(59,130,246,.03);border-color:rgba(59,130,246,.15)}
 
-.duration-btn{padding:6px 14px;border-radius:50px;border:1.5px solid var(--border2);background:var(--surface);cursor:pointer;font-family:var(--font-b);font-size:12px;font-weight:600;color:var(--text2);transition:all .18s}
-.duration-btn:hover{border-color:var(--teal);color:var(--teal)}
-.duration-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);box-shadow:0 4px 12px rgba(0,168,150,.3)}
+.duration-btn{padding:8px 18px;border-radius:50px;border:1px solid transparent;background:var(--surface2);cursor:pointer;font-size:13px;font-weight:600;color:var(--text2);transition:all .25s ease}
+.duration-btn:hover{background:var(--surface);border-color:var(--border);color:var(--text);box-shadow:var(--shadow)}
+.duration-btn.active{background:var(--text);color:var(--surface);box-shadow:0 8px 24px rgba(0,0,0,0.15)}
 
-.ai-loading{display:flex;flex-direction:column;align-items:center;gap:14px;padding:40px 0}
-.ai-loading-bar{width:200px;height:4px;background:var(--surface2);border-radius:4px;overflow:hidden;position:relative}
-.ai-loading-bar::after{content:'';position:absolute;top:0;left:-50%;width:50%;height:100%;background:linear-gradient(90deg,transparent,var(--teal),transparent);animation:shimmer 1s infinite}
+.ai-loading{display:flex;flex-direction:column;align-items:center;gap:16px;padding:60px 0}
+.ai-loading-bar{width:240px;height:6px;background:var(--surface2);border-radius:6px;overflow:hidden;position:relative}
+.ai-loading-bar::after{content:'';position:absolute;top:0;left:-50%;width:50%;height:100%;background:linear-gradient(90deg,transparent,var(--teal),transparent);animation:shimmer 1.2s infinite}
 
 /* ── Appointment Modal ── */
 @keyframes checkPop{0%{transform:scale(0) rotate(-45deg);opacity:0}50%{transform:scale(1.2) rotate(5deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
-@keyframes confetti{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(120px) rotate(720deg);opacity:0}}
 
-.slot-btn{width:100%;padding:14px 18px;border-radius:14px;border:1.5px solid var(--border2);background:var(--surface);cursor:pointer;font-family:var(--font-b);font-size:14px;font-weight:600;color:var(--text);transition:all .2s;display:flex;align-items:center;justify-content:space-between}
-.slot-btn:hover{border-color:var(--teal);background:var(--teal-bg);color:var(--teal2);transform:translateX(4px)}
-.slot-btn.booked{border-color:var(--teal);background:var(--teal-bg2);color:var(--teal2);pointer-events:none}
+.slot-btn{width:100%;padding:16px 24px;border-radius:20px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:15px;font-weight:600;color:var(--text);transition:all .25s ease;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow)}
+.slot-btn:hover{border-color:var(--teal);background:var(--surface);color:var(--teal);transform:translateX(6px);box-shadow:var(--shadow2)}
+.slot-btn.booked{border-color:transparent;background:var(--surface2);color:var(--text3);pointer-events:none;box-shadow:none}
 
-.confirm-check{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#15803d);display:flex;align-items:center;justify-content:center;animation:checkPop .5s cubic-bezier(.22,1,.36,1);box-shadow:0 12px 40px rgba(34,197,94,0.3)}
+.confirm-check{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#34d399,#059669);display:flex;align-items:center;justify-content:center;animation:checkPop .6s cubic-bezier(0.16, 1, 0.3, 1);box-shadow:0 16px 40px rgba(16,185,129,0.3)}
 
 /* ── Dashboard table ── */
-.dash-table{width:100%;border-collapse:separate;border-spacing:0 6px}
-.dash-table th{text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);padding:8px 14px;font-family:var(--font-b)}
-.dash-table td{padding:12px 14px;font-size:13.5px;color:var(--text);font-family:var(--font-b);background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.dash-table td:first-child{border-left:1px solid var(--border);border-radius:12px 0 0 12px}
-.dash-table td:last-child{border-right:1px solid var(--border);border-radius:0 12px 12px 0}
-.dash-table tr:hover td{background:var(--teal-bg)}
+.dash-table{width:100%;border-collapse:separate;border-spacing:0 8px}
+.dash-table th{text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);padding:10px 18px}
+.dash-table td{padding:16px 18px;font-size:14px;color:var(--text);background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);transition:all .2s ease}
+.dash-table td:first-child{border-left:1px solid var(--border);border-radius:16px 0 0 16px}
+.dash-table td:last-child{border-right:1px solid var(--border);border-radius:0 16px 16px 0}
+.dash-table tr:hover td{background:var(--surface2);border-color:var(--border2)}
 
-.triage-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;font-family:var(--font-b);text-transform:uppercase;letter-spacing:.04em}
-.triage-high{background:rgba(239,68,68,.1);color:#dc2626;border:1px solid rgba(239,68,68,.25)}
-.triage-medium{background:rgba(245,158,11,.1);color:#b45309;border:1px solid rgba(245,158,11,.25)}
-.triage-low{background:rgba(34,197,94,.1);color:#15803d;border:1px solid rgba(34,197,94,.25)}
+.triage-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.triage-high{background:rgba(239,68,68,.08);color:#b91c1c;border:1px solid transparent}
+.triage-medium{background:rgba(245,158,11,.08);color:#b45309;border:1px solid transparent}
+.triage-low{background:rgba(34,197,94,.08);color:#15803d;border:1px solid transparent}
 
 /* ── Chart bars ── */
-.chart-bar-h{height:28px;border-radius:6px;transition:width .8s cubic-bezier(.22,1,.36,1);position:relative;display:flex;align-items:center;padding-left:10px;font-size:11px;font-weight:700;color:#fff;min-width:30px}
+.chart-bar-h{height:32px;border-radius:8px;transition:width 1s cubic-bezier(0.16, 1, 0.3, 1);position:relative;display:flex;align-items:center;padding-left:12px;font-size:12px;font-weight:700;color:#fff;min-width:36px}
 
 /* ── Profile Photo Upload ── */
 .profile-pic-upload{position:relative;cursor:pointer;display:inline-block}
-.profile-pic-upload:hover .pic-overlay{opacity:1}
-.pic-overlay{position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;color:#fff}
-.profile-pic-img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.profile-pic-upload:hover .pic-overlay{opacity:1;backdrop-filter:blur(4px)}
+.pic-overlay{position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;opacity:0;transition:all .3s ease;color:#fff}
+.profile-pic-img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid var(--surface);box-shadow:var(--shadow2)}
 
 /* ── Edit Profile Modal ── */
-.edit-profile-form{display:flex;flex-direction:column;gap:18px;padding:24px 28px}
-.edit-profile-form label{font-size:11.5px;font-weight:700;color:var(--text2);font-family:var(--font-b);text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px}
+.edit-profile-form{display:flex;flex-direction:column;gap:24px;padding:32px 36px}
+.edit-profile-form label{font-size:12.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:8px}
 .edit-profile-form .inp{width:100%}
-.edit-photo-area{display:flex;align-items:center;gap:20px}
-.photo-preview{width:80px;height:80px;border-radius:50%;position:relative;overflow:hidden;flex-shrink:0;border:3px solid var(--border)}
+.edit-photo-area{display:flex;align-items:center;gap:24px}
+.photo-preview{width:96px;height:96px;border-radius:50%;position:relative;overflow:hidden;flex-shrink:0;border:4px solid var(--surface2);box-shadow:var(--shadow)}
 .photo-preview img{width:100%;height:100%;object-fit:cover}
-.photo-preview .initials-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-weight:800;font-family:var(--font-b);color:#fff;font-size:28px}
-.photo-actions{display:flex;flex-direction:column;gap:8px}
+.photo-preview .initials-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--text);font-size:32px;background:var(--surface2)}
+.photo-actions{display:flex;flex-direction:column;gap:10px}
 
 /* ── Account Details Card ── */
-.account-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;margin-bottom:16px}
-.account-card-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
-.account-card-header h3{font-family:var(--font-b);font-size:14px;font-weight:800;color:var(--text)}
-.account-row{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border);transition:background .15s}
+.account-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;overflow:hidden;margin-bottom:20px;box-shadow:var(--shadow)}
+.account-card-header{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:var(--surface2)}
+.account-card-header h3{font-size:15px;font-weight:700;color:var(--text)}
+.account-row{display:flex;align-items:flex-start;gap:16px;padding:18px 24px;border-bottom:1px solid var(--border);transition:background .2s ease}
 .account-row:last-child{border-bottom:none}
 .account-row:hover{background:var(--surface2)}
-.account-row-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.account-row-icon{width:40px;height:40px;border-radius:12px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,0.02)}
 .account-row-content{flex:1;min-width:0}
-.account-row-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--text3);margin-bottom:2px;font-family:var(--font-b)}
-.account-row-value{font-size:14px;font-weight:600;color:var(--text);font-family:var(--font-b);word-break:break-all}
+.account-row-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);margin-bottom:4px}
+.account-row-value{font-size:15px;font-weight:500;color:var(--text);word-break:break-all}
 
-/* ── Dark Mode ── */
-.dark{--bg:#0d1117;--surface:#161b22;--surface2:#1c2333;--border:#2d333b;--border2:#3d444d;--teal:#2dd4a8;--teal2:#5eebc5;--teal-bg:rgba(45,212,168,0.08);--teal-bg2:rgba(45,212,168,0.14);--blue:#4da6ff;--coral:#ff6b6b;--gold:#fbbf24;--text:#e6edf3;--text2:#9aa3b2;--text3:#5a6478;--shadow:0 2px 12px rgba(0,0,0,0.3),0 1px 3px rgba(0,0,0,0.2);--shadow2:0 8px 32px rgba(0,0,0,0.4),0 2px 8px rgba(0,0,0,0.2);--shadow3:0 24px 64px rgba(0,0,0,0.5),0 4px 16px rgba(0,0,0,0.3);--bg-blur:rgba(13,17,23,0.9);--tip-card-bg:rgba(28,35,51,0.6);--disclaimer-text:#d4a574}
-.dark .login-wrap{background:linear-gradient(135deg,#0d1117 0%,#131922 30%,#111827 70%,#161b22 100%)}
-.dark .login-card{background:#161b22;border-color:#2d333b}
-.dark .badge-doc{background:rgba(45,212,168,.12);border-color:rgba(45,212,168,.3);color:var(--teal2)}
-.dark .badge-pat{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.3);color:#fbbf24}
-.dark .post-card{background:#161b22;border-color:#2d333b}
-.dark .post-card:hover{border-color:rgba(45,212,168,0.3)}
-.dark .composer{background:#161b22;border-color:#2d333b}
-.dark .trend-card{background:#1c2333;border-color:#2d333b}
-.dark .btn-p{background:linear-gradient(135deg,#2dd4a8,#00a896)}
-.dark .overlay{background:rgba(0,0,0,0.7)}
-.dark .modal-box{background:#161b22;border-color:#2d333b}
-.dark .inp{background:#1c2333;border-color:#2d333b;color:var(--text)}
-.dark .inp:focus{background:#161b22}
-.dark .ai-card{background:#161b22;border-color:#2d333b}
-.dark .account-card{background:#161b22;border-color:#2d333b}
-.dark .slot-btn{background:#1c2333;border-color:#2d333b;color:var(--text)}
-.dark .profile-cover{background:linear-gradient(135deg,#0a4a43 0%,#073b36 40%,#0d2d5e 100%)}
-.dark .dash-table td{background:#1c2333;border-color:#2d333b}
-.dark .dash-table tr:hover td{background:rgba(45,212,168,.06)}
-.dark .hashtag-pill{background:#1c2333;border-color:#2d333b;color:var(--text2)}
-.dark .page-sticky-header{background:rgba(13,17,23,0.9)}
-.dark .right-rail{background:#161b22;border-color:#2d333b}
+/* ── Dark Mode (Completely Overhauled to deeper elegant tech blues/blacks) ── */
+.dark{
+  --bg:#020617; /* Slate 950 */
+  --surface:#0f172a; /* Slate 900 */
+  --surface2:#1e293b; /* Slate 800 */
+  --border:#334155; /* Slate 700 */
+  --border2:#475569; /* Slate 600 */
+  --teal:#3b82f6;
+  --teal2:#60a5fa;
+  --teal-bg:rgba(59,130,246,0.1);
+  --teal-bg2:rgba(59,130,246,0.15);
+  --blue:#818cf8;
+  --coral:#f87171;
+  --gold:#fbbf24;
+  --text:#f8fafc;
+  --text2:#94a3b8;
+  --text3:#64748b;
+  --shadow:0 10px 30px rgba(0,0,0,0.5),0 4px 12px rgba(0,0,0,0.3);
+  --shadow2:0 20px 50px rgba(0,0,0,0.6),0 8px 16px rgba(0,0,0,0.4);
+  --shadow3:0 40px 100px rgba(0,0,0,0.7),0 20px 40px rgba(0,0,0,0.5);
+  --bg-blur:rgba(2,6,23,0.85);
+  --tip-card-bg:rgba(15,23,42,0.8);
+  --disclaimer-text:#fbbf24;
+}
+.dark .login-wrap{background:linear-gradient(135deg,#020617 0%,#0f172a 50%,#1e293b 100%)}
+.dark .login-card{background:rgba(15,23,42,0.8);border-color:rgba(255,255,255,0.05);box-shadow:var(--shadow3)}
+.dark .badge-doc{background:rgba(59,130,246,.15);color:var(--teal2)}
+.dark .badge-pat{background:rgba(251,191,36,.15);color:#fbbf24}
+.dark .composer{background:rgba(15,23,42,0.8);border-color:rgba(255,255,255,0.05)}
+.dark .btn-p{background:linear-gradient(135deg,#3b82f6,#2563eb);box-shadow:0 10px 20px rgba(37,99,235,0.3)}
+.dark .overlay{background:rgba(0,0,0,0.8)}
+.dark .modal-box{border-color:rgba(255,255,255,0.05)}
+.dark .inp{background:rgba(0,0,0,0.2);border-color:rgba(255,255,255,0.05)}
+.dark .inp:focus{background:var(--surface);border-color:var(--teal);box-shadow:0 0 0 4px rgba(59,130,246,0.2)}
+.dark .ai-page-header{background:rgba(2,6,23,0.85)}
+.dark .slot-btn{background:rgba(0,0,0,0.2);border-color:rgba(255,255,255,0.05)}
+.dark .profile-cover{background:linear-gradient(135deg,#1e3a8a 0%,#312e81 100%)}
+.dark .hashtag-pill{background:rgba(0,0,0,0.2);border-color:rgba(255,255,255,0.05)}
+.dark .hashtag-pill:hover{background:var(--surface2)}
+.dark .hashtag-pill.active{background:var(--teal);color:#fff}
+.dark .post-card,.dark .ai-card,.dark .account-card,.dark .trend-card{border-color:rgba(255,255,255,0.05)}
+.dark .post-card:hover,.dark .trend-card:hover{border-color:rgba(59,130,246,0.4)}
+.dark .dash-table td{border-top-color:rgba(255,255,255,0.05);border-bottom-color:rgba(255,255,255,0.05)}
+.dark .dash-table td:first-child{border-left-color:rgba(255,255,255,0.05)}
+.dark .dash-table td:last-child{border-right-color:rgba(255,255,255,0.05)}
+.dark .dash-table tr:hover td{background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.1)}
 
 /* ── Theme toggle ── */
-.theme-toggle{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;transition:all .18s;font-family:var(--font-b);font-size:12px;font-weight:600;color:var(--text2);width:100%}
-.theme-toggle:hover{border-color:var(--teal);color:var(--teal)}
+.theme-toggle{display:flex;align-items:center;gap:12px;padding:12px 18px;border-radius:14px;border:1px solid transparent;background:var(--surface2);cursor:pointer;transition:all .25s ease;font-size:14px;font-weight:600;color:var(--text2);width:100%}
+.theme-toggle:hover{background:var(--surface);border-color:var(--border);color:var(--text);transform:translateY(-2px);box-shadow:var(--shadow)}
 `;
 
 
@@ -608,7 +626,7 @@ const PostCard = ({post, idx=0, onHashtagClick, onProfileClick}) => {
               </div>
             </div>
           ):(
-            <p style={{fontSize:12,color:"var(--text3)",textAlign:"center",padding:"6px 0",fontStyle:"italic"}}>
+            <p style={{fontSize:12,color:"var(--text3)",textAlign:"center",padding:"6px 0",}}>
               Only verified doctors can respond to patient posts.
             </p>
           )}
@@ -766,7 +784,7 @@ const LeftSidebar = ({activePage, setPage}) => {
           <div style={{width:36,height:36,background:"linear-gradient(135deg,#00a896,#007a6e)",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 16px rgba(0,168,150,0.3)"}}>
             <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
           </div>
-          <span className="nav-logo-text" style={{fontFamily:"var(--font-d)",fontSize:20,fontWeight:400,color:"var(--text)",letterSpacing:"-.01em",fontStyle:"italic"}}>Svasthya</span>
+          <span className="nav-logo-text" style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:20,fontWeight:400,color:"var(--text)",letterSpacing:"-.01em",}}>Svasthya</span>
         </div>
       </div>
       <nav style={{padding:"12px 12px",flex:1}}>
@@ -887,7 +905,7 @@ const FeedPage = ({onHashtagClick, onProfileClick}) => {
   return (
     <div style={{maxWidth:600,margin:"0 auto",padding:"0 16px 80px"}}>
       <div style={{position:"sticky",top:0,zIndex:19,background:"var(--bg-blur)",backdropFilter:"blur(12px)",padding:"14px 0 10px",borderBottom:"1px solid var(--border)",marginBottom:0}}>
-        <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic"}}>Home Feed</h1>
+        <h1 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:22,fontWeight:400,color:"var(--text)",}}>Home Feed</h1>
         <p style={{fontSize:12,color:"var(--text3)",marginTop:2}}>{feedPosts.length} posts from your community</p>
       </div>
       <Composer/>
@@ -933,7 +951,7 @@ const SearchPage = ({initialTag, onProfileClick}) => {
   return (
     <div style={{maxWidth:600,margin:"0 auto",padding:"0 16px 80px"}}>
       <div style={{position:"sticky",top:0,zIndex:19,background:"var(--bg-blur)",backdropFilter:"blur(12px)",padding:"14px 0 12px",borderBottom:"1px solid var(--border)"}}>
-        <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic",marginBottom:12}}>Search</h1>
+        <h1 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:22,fontWeight:400,color:"var(--text)",marginBottom:12}}>Search</h1>
         <div style={{position:"relative"}}>
           <span style={{position:"absolute",left:14,top:"50%",transform:"translateY(-50%)",color:"var(--text3)"}}>{IC.search}</span>
           <input className="inp" value={query} onChange={e=>{setQuery(e.target.value);setActiveTag(null);}}
@@ -965,7 +983,7 @@ const SearchPage = ({initialTag, onProfileClick}) => {
       {filtered.length===0?(
         <div style={{textAlign:"center",padding:"64px 32px",color:"var(--text3)"}}>
           <div style={{fontSize:48,marginBottom:14,animation:"float 3s ease-in-out infinite"}}>🔍</div>
-          <p style={{fontFamily:"var(--font-d)",fontSize:20,fontStyle:"italic",color:"var(--text2)",marginBottom:6}}>No results found</p>
+          <p style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:20,color:"var(--text2)",marginBottom:6}}>No results found</p>
           <p style={{fontSize:13}}>Try a different search term or hashtag</p>
         </div>
       ):(
@@ -987,7 +1005,7 @@ const DoctorsPage = ({onHashtagClick, onProfileClick}) => {
   return (
     <div style={{maxWidth:600,margin:"0 auto",padding:"0 16px 80px"}}>
       <div style={{position:"sticky",top:0,zIndex:19,background:"var(--bg-blur)",backdropFilter:"blur(12px)",padding:"14px 0 10px",borderBottom:"1px solid var(--border)",marginBottom:0}}>
-        <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic"}}>Knowledge Hub</h1>
+        <h1 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:22,fontWeight:400,color:"var(--text)",}}>Knowledge Hub</h1>
         <p style={{fontSize:12,color:"var(--text3)",marginTop:2}}>Medical knowledge shared by verified doctors</p>
       </div>
       <div style={{margin:"16px 0",background:"linear-gradient(135deg,rgba(0,168,150,.08),rgba(26,115,232,.05))",border:"1.5px solid rgba(0,168,150,.2)",borderRadius:16,padding:"18px 20px",display:"flex",gap:14,alignItems:"flex-start"}} className="fu">
@@ -1001,7 +1019,7 @@ const DoctorsPage = ({onHashtagClick, onProfileClick}) => {
               ? "Share evidence-based medical knowledge with the community. Your posts will be marked as verified physician content."
               : "Read verified medical content from our network of doctors. Only verified physicians can post here."}
           </p>
-          {!isDoc&&<p style={{fontSize:12,color:"var(--text3)",marginTop:6,fontStyle:"italic"}}>💡 Patients can read and bookmark but cannot post in this section.</p>}
+          {!isDoc&&<p style={{fontSize:12,color:"var(--text3)",marginTop:6,}}>💡 Patients can read and bookmark but cannot post in this section.</p>}
         </div>
       </div>
       {isDoc&&<Composer defaultType="doctor_post" placeholder="Share medical knowledge, disease info, prevention tips…"/>}
@@ -1009,7 +1027,7 @@ const DoctorsPage = ({onHashtagClick, onProfileClick}) => {
         {docPosts.length===0?(
           <div style={{textAlign:"center",padding:"64px 32px",color:"var(--text3)"}}>
             <div style={{fontSize:48,marginBottom:14,animation:"float 3s ease-in-out infinite"}}>📚</div>
-            <p style={{fontFamily:"var(--font-d)",fontSize:20,fontStyle:"italic",color:"var(--text2)",marginBottom:6}}>No knowledge posts yet</p>
+            <p style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:20,color:"var(--text2)",marginBottom:6}}>No knowledge posts yet</p>
             {isDoc&&<p style={{fontSize:13}}>Be the first to share medical knowledge!</p>}
           </div>
         ):(
@@ -1074,7 +1092,7 @@ const EditProfileModal = ({profileUser, onClose, onSave, currentData}) => {
         <div style={{ background: "linear-gradient(135deg,#00a896,#007a6e)", padding: "20px 28px", borderRadius: "28px 28px 0 0", color: "#fff", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             {IC.edit}
-            <span style={{ fontSize: 18, fontFamily: "var(--font-d)", fontStyle: "italic", fontWeight: 300 }}>Edit Profile</span>
+            <span style={{ fontSize: 18, fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",  fontWeight: 300 }}>Edit Profile</span>
           </div>
           <button onClick={onClose} style={{ background: "rgba(255,255,255,.15)", border: "none", borderRadius: "50%", width: 32, height: 32, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff" }}>{IC.close}</button>
         </div>
@@ -1216,7 +1234,7 @@ const ProfilePage = ({profileUserId, onHashtagClick}) => {
         </div>
         <div style={{marginBottom:14}}>
           <div style={{display:"flex",alignItems:"center",gap:9,marginBottom:4}}>
-            <h2 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,fontStyle:"italic",color:"var(--text)"}}>{profileUser?.name}</h2>
+            <h2 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:22,fontWeight:400,color:"var(--text)"}}>{profileUser?.name}</h2>
             {isDoc&&<span className="badge-doc">{IC.shield} Verified MD</span>}
           </div>
           {isDoc&&<p style={{fontSize:13,color:"var(--teal2)",marginBottom:4}}>🩺 {profileUser?.specialty}{profileUser?.location ? ` · 📍 ${profileUser.location}` : ""}</p>}
@@ -1242,7 +1260,7 @@ const ProfilePage = ({profileUserId, onHashtagClick}) => {
       <div style={{padding:"12px 16px"}}>
         {activeTab==="posts"&&(
           userPosts.length===0
-            ? <div style={{textAlign:"center",padding:"48px",color:"var(--text3)"}}><div style={{fontSize:40,marginBottom:12}}>📝</div><p style={{fontFamily:"var(--font-d)",fontSize:18,fontStyle:"italic",color:"var(--text2)"}}>No posts yet</p></div>
+            ? <div style={{textAlign:"center",padding:"48px",color:"var(--text3)"}}><div style={{fontSize:40,marginBottom:12}}>📝</div><p style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:18,color:"var(--text2)"}}>No posts yet</p></div>
             : userPosts.map((p,i)=><PostCard key={p.id} post={p} idx={i} onHashtagClick={onHashtagClick}/>)
         )}
         {activeTab==="account"&&(
@@ -1328,12 +1346,12 @@ const ProfilePage = ({profileUserId, onHashtagClick}) => {
         )}
         {activeTab==="saved"&&(
           savedPosts.length===0
-            ? <div style={{textAlign:"center",padding:"48px",color:"var(--text3)"}}><div style={{fontSize:40,marginBottom:12}}>🔖</div><p style={{fontFamily:"var(--font-d)",fontSize:18,fontStyle:"italic",color:"var(--text2)"}}>Nothing saved yet</p><p style={{fontSize:13,marginTop:6}}>Bookmark posts to read them later</p></div>
+            ? <div style={{textAlign:"center",padding:"48px",color:"var(--text3)"}}><div style={{fontSize:40,marginBottom:12}}>🔖</div><p style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:18,color:"var(--text2)"}}>Nothing saved yet</p><p style={{fontSize:13,marginTop:6}}>Bookmark posts to read them later</p></div>
             : savedPosts.map((p,i)=><PostCard key={p.id} post={p} idx={i} onHashtagClick={onHashtagClick}/>)
         )}
         {activeTab==="history"&&(
           patientReports.length===0
-            ? <div style={{textAlign:"center",padding:"48px",color:"var(--text3)"}}><div style={{fontSize:40,marginBottom:12}}>📋</div><p style={{fontFamily:"var(--font-d)",fontSize:18,fontStyle:"italic",color:"var(--text2)"}}>No medical history yet</p></div>
+            ? <div style={{textAlign:"center",padding:"48px",color:"var(--text3)"}}><div style={{fontSize:40,marginBottom:12}}>📋</div><p style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:18,color:"var(--text2)"}}>No medical history yet</p></div>
             : patientReports.map((r,i)=>(
               <div key={r.id} className={`ai-card fu s${Math.min(i+1,6)}`} style={{marginBottom:12}}>
                 <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
@@ -1452,7 +1470,7 @@ const ConsultationPage = () => {
         <div style={{display:"flex",alignItems:"center",gap:10}}>
           <div style={{width:36,height:36,background:"linear-gradient(135deg,#8b5cf6,#6d28d9)",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 16px rgba(139,92,246,0.3)"}}>{IC.brain}</div>
           <div>
-            <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic"}}>AI Summariser</h1>
+            <h1 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:22,fontWeight:400,color:"var(--text)",}}>AI Summariser</h1>
             <p style={{fontSize:12,color:"var(--text3)",marginTop:1}}>Structured symptom summary for doctors</p>
           </div>
         </div>
@@ -1502,7 +1520,7 @@ const ConsultationPage = () => {
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:18}}>
             <div style={{display:"flex",alignItems:"center",gap:10}}>
               <span style={{fontSize:22}}>📋</span>
-              <h3 style={{fontFamily:"var(--font-d)",fontSize:19,fontStyle:"italic",fontWeight:400}}>Consultation Summary</h3>
+              <h3 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:19,fontWeight:400}}>Consultation Summary</h3>
             </div>
             <button className="btn-g" onClick={copyResult} style={{padding:"6px 14px",fontSize:12}}>
               {copied ? <>{IC.check} Copied!</> : <>{IC.clipboard} Copy</>}
@@ -1605,7 +1623,7 @@ const OutbreakPage = () => {
         <div style={{display:"flex",alignItems:"center",gap:10}}>
           <div style={{width:36,height:36,background:"linear-gradient(135deg,#ff5c5c,#c03030)",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 16px rgba(255,92,92,0.3)"}}>{IC.activity}</div>
           <div>
-            <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic"}}>Outbreak Detection</h1>
+            <h1 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:22,fontWeight:400,color:"var(--text)",}}>Outbreak Detection</h1>
             <p style={{fontSize:12,color:"var(--text3)",marginTop:1}}>Real-time symptom pattern analysis across regions</p>
           </div>
         </div>
@@ -1785,7 +1803,7 @@ const MisinfoPage = () => {
         <div style={{display:"flex",alignItems:"center",gap:10}}>
           <div style={{width:36,height:36,background:"linear-gradient(135deg,#00a896,#007a6e)",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 16px rgba(0,168,150,0.3)"}}>{IC.shield2}</div>
           <div>
-            <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic"}}>Fight Misinformation</h1>
+            <h1 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:22,fontWeight:400,color:"var(--text)",}}>Fight Misinformation</h1>
             <p style={{fontSize:12,color:"var(--text3)",marginTop:1}}>AI-filtered credible health information</p>
           </div>
         </div>
@@ -1845,7 +1863,7 @@ const MisinfoPage = () => {
 
       {result && !loading && result.map((entry,idx)=>(
         <div key={idx} className="ai-result-box fu" style={{marginBottom:16,animationDelay:`${idx*0.1}s`}}>
-          <p style={{fontFamily:"var(--font-d)",fontSize:18,fontStyle:"italic",marginBottom:16,color:"var(--text)"}}>
+          <p style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:18,marginBottom:16,color:"var(--text)"}}>
             Results for: <span style={{color:"var(--teal2)",textTransform:"capitalize"}}>{entry.symptom}</span>
           </p>
 
@@ -1943,7 +1961,7 @@ const MedicalTestPage = () => {
           <div className="confirm-check" style={{margin:"0 auto 20px"}}>
             <svg width="36" height="36" fill="none" stroke="#fff" strokeWidth="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
-          <h2 style={{fontFamily:"var(--font-d)",fontSize:26,fontStyle:"italic",color:"var(--text)",marginBottom:12}}>Booking Confirmed!</h2>
+          <h2 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:26,color:"var(--text)",marginBottom:12}}>Booking Confirmed!</h2>
           <p style={{fontSize:15,color:"var(--text2)",marginBottom:6}}>Your tests are scheduled at <strong>{lab.name}</strong></p>
           <p style={{fontSize:16,fontWeight:800,color:"var(--teal2)",marginBottom:20}}>{timeSlot}</p>
           <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:14,padding:16,display:"inline-block",textAlign:"left"}}>
@@ -1966,7 +1984,7 @@ const MedicalTestPage = () => {
         <div style={{display:"flex",alignItems:"center",gap:10}}>
           <div style={{width:36,height:36,background:"linear-gradient(135deg,#00a896,#007a6e)",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 16px rgba(0,168,150,0.3)",color:"#fff"}}>{IC.clipboard}</div>
           <div>
-            <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic"}}>Book Medical Tests</h1>
+            <h1 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:22,fontWeight:400,color:"var(--text)",}}>Book Medical Tests</h1>
             <p style={{fontSize:12,color:"var(--text3)",marginTop:1}}>Schedule lab tests and health checkups</p>
           </div>
         </div>
@@ -2174,7 +2192,7 @@ const LoginPage = ({onLogin}) => {
               <div style={{width:60,height:60,background:"linear-gradient(135deg,#00a896,#007a6e)",borderRadius:20,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 16px",boxShadow:"0 12px 40px rgba(0,168,150,0.3)"}}>
                 <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
               </div>
-              <h1 style={{fontFamily:"var(--font-d)",fontSize:30,fontWeight:400,fontStyle:"italic",color:"var(--text)",letterSpacing:"-.01em"}}>Svasthya</h1>
+              <h1 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:30,fontWeight:400,color:"var(--text)",letterSpacing:"-.01em"}}>Svasthya</h1>
               <p style={{color:"var(--text3)",fontSize:13.5,marginTop:5}}>Community healthcare, together</p>
             </div>
             {err&&(
@@ -2225,7 +2243,7 @@ const LoginPage = ({onLogin}) => {
               <div style={{width:50,height:50,background:"linear-gradient(135deg,#00a896,#007a6e)",borderRadius:16,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 12px",boxShadow:"0 8px 24px rgba(0,168,150,0.3)"}}>
                 <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
               </div>
-              <h2 style={{fontFamily:"var(--font-d)",fontSize:24,fontWeight:400,fontStyle:"italic",color:"var(--text)"}}>Create Account</h2>
+              <h2 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:24,fontWeight:400,color:"var(--text)"}}>Create Account</h2>
               <p style={{color:"var(--text3)",fontSize:13,marginTop:4}}>Join the Svasthya community</p>
             </div>
             <div style={{display:"flex",flexDirection:"column",gap:12}}>
@@ -2256,7 +2274,7 @@ const LoginPage = ({onLogin}) => {
         {mode==="register" && step===2 && (
           <>
             <div style={{textAlign:"center",marginBottom:24}}>
-              <h2 style={{fontFamily:"var(--font-d)",fontSize:24,fontWeight:400,fontStyle:"italic",color:"var(--text)"}}>I am a…</h2>
+              <h2 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:24,fontWeight:400,color:"var(--text)"}}>I am a…</h2>
               <p style={{color:"var(--text3)",fontSize:13,marginTop:4}}>Choose your role to personalize your experience</p>
             </div>
             <div style={{display:"flex",flexDirection:"column",gap:12}}>
@@ -2285,7 +2303,7 @@ const LoginPage = ({onLogin}) => {
             <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:20}}>
               <span style={{fontSize:28}}>🧑</span>
               <div>
-                <h2 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,fontStyle:"italic",color:"var(--text)"}}>Patient Details</h2>
+                <h2 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:22,fontWeight:400,color:"var(--text)"}}>Patient Details</h2>
                 <p style={{color:"var(--text3)",fontSize:12,marginTop:2}}>Tell us a bit about yourself</p>
               </div>
             </div>
@@ -2353,7 +2371,7 @@ const LoginPage = ({onLogin}) => {
             <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:20}}>
               <span style={{fontSize:28}}>🩺</span>
               <div>
-                <h2 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,fontStyle:"italic",color:"var(--text)"}}>Doctor Verification</h2>
+                <h2 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:22,fontWeight:400,color:"var(--text)"}}>Doctor Verification</h2>
                 <p style={{color:"var(--text3)",fontSize:12,marginTop:2}}>Verify your medical credentials</p>
               </div>
             </div>
@@ -2434,7 +2452,7 @@ const AppointmentModal = ({doctor, onClose}) => {
       <div className="modal-box" onClick={e=>e.stopPropagation()} style={{padding:0,maxWidth:480}}>
         <div style={{background:"linear-gradient(135deg,#00a896,#007a6e)",padding:"24px 28px",borderRadius:"28px 28px 0 0",color:"#fff"}}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:12}}>
-            <span style={{fontSize:18,fontWeight:300,fontFamily:"var(--font-d)",fontStyle:"italic"}}>Book Appointment</span>
+            <span style={{fontSize:18,fontWeight:300,fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",}}>Book Appointment</span>
             <button onClick={onClose} style={{background:"rgba(255,255,255,.15)",border:"none",borderRadius:"50%",width:32,height:32,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff"}}>{IC.close}</button>
           </div>
           <div style={{display:"flex",alignItems:"center",gap:14}}>
@@ -2479,7 +2497,7 @@ const AppointmentModal = ({doctor, onClose}) => {
             <div className="confirm-check" style={{margin:"0 auto 20px"}}>
               <svg width="36" height="36" fill="none" stroke="#fff" strokeWidth="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
-            <h3 style={{fontFamily:"var(--font-d)",fontSize:22,fontStyle:"italic",color:"var(--text)",marginBottom:8}}>Appointment Confirmed!</h3>
+            <h3 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:22,color:"var(--text)",marginBottom:8}}>Appointment Confirmed!</h3>
             <p style={{fontSize:14,color:"var(--text2)",marginBottom:4}}>With <strong>{doctor.name}</strong></p>
             <p style={{fontSize:15,fontWeight:700,color:"var(--teal2)"}}>{bookedSlot}</p>
             <p style={{fontSize:12,color:"var(--text3)",marginTop:12}}>Tomorrow</p>
@@ -2517,7 +2535,7 @@ const DoctorDashboardPage = () => {
         <div style={{display:"flex",alignItems:"center",gap:10}}>
           <div style={{width:36,height:36,background:"linear-gradient(135deg,#1a73e8,#1558b0)",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 16px rgba(26,115,232,0.3)"}}>{IC.clipboard}</div>
           <div>
-            <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic"}}>Doctor Dashboard</h1>
+            <h1 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:22,fontWeight:400,color:"var(--text)",}}>Doctor Dashboard</h1>
             <p style={{fontSize:12,color:"var(--text3)",marginTop:1}}>{isDoc?"Patient cases with AI summaries":"View your medical reports"}</p>
           </div>
         </div>
@@ -2568,7 +2586,7 @@ const DoctorDashboardPage = () => {
           <div className="modal-box" onClick={e=>e.stopPropagation()} style={{padding:0,maxWidth:560}}>
             <div style={{background:"linear-gradient(135deg,#1a73e8,#1558b0)",padding:"20px 24px",borderRadius:"28px 28px 0 0",color:"#fff",display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
               <div>
-                <h3 style={{fontFamily:"var(--font-d)",fontSize:20,fontStyle:"italic",fontWeight:400}}>{selected.patientName}</h3>
+                <h3 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:20,fontWeight:400}}>{selected.patientName}</h3>
                 <p style={{fontSize:13,opacity:.8,marginTop:4}}>Age {selected.age} · {selected.city} · {selected.duration}</p>
               </div>
               <div style={{display:"flex",alignItems:"center",gap:8}}>
@@ -2643,7 +2661,7 @@ const HealthTrendsPage = () => {
         <div style={{display:"flex",alignItems:"center",gap:10}}>
           <div style={{width:36,height:36,background:"linear-gradient(135deg,#f59e0b,#d97706)",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 16px rgba(245,158,11,0.3)"}}>{IC.trend}</div>
           <div>
-            <h1 style={{fontFamily:"var(--font-d)",fontSize:22,fontWeight:400,color:"var(--text)",fontStyle:"italic"}}>Health Trends</h1>
+            <h1 style={{fontFamily:"var(--font-d)",fontWeight:700,letterSpacing:"-0.02em",fontSize:22,fontWeight:400,color:"var(--text)",}}>Health Trends</h1>
             <p style={{fontSize:12,color:"var(--text3)",marginTop:1}}>Community symptom analytics & patterns</p>
           </div>
         </div>
@@ -2703,7 +2721,7 @@ const HealthTrendsPage = () => {
             <span style={{fontSize:12,fontWeight:700,color:"var(--teal2)",background:"var(--teal-bg)",padding:"3px 10px",borderRadius:20}}>{a}</span>
             <span style={{color:"var(--text3)"}}>+</span>
             <span style={{fontSize:12,fontWeight:700,color:"#1558b0",background:"rgba(26,115,232,.08)",padding:"3px 10px",borderRadius:20}}>{b}</span>
-            <span style={{fontSize:12,color:"var(--text2)",marginLeft:"auto",fontStyle:"italic"}}>{note}</span>
+            <span style={{fontSize:12,color:"var(--text2)",marginLeft:"auto",}}>{note}</span>
           </div>
         ))}
       </div>
