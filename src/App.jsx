@@ -307,8 +307,14 @@ const useApp = () => useContext(AppCtx);
 const USERS = [
   {id:1,name:"Dr. Priya Sharma",email:"priya@doc.com",password:"1234",role:"doctor",avatar:"PS",specialty:"General Physician",location:"Mumbai, Maharashtra",consultFee:500,bio:"MBBS, MD. 12 years of clinical practice. Passionate about community health education.",followers:1240,following:89,online:true},
   {id:2,name:"Dr. Arjun Mehta",email:"arjun@doc.com",password:"1234",role:"doctor",avatar:"AM",specialty:"Neurologist",location:"Delhi, NCR",consultFee:800,bio:"DM Neurology. Headaches, migraines, epilepsy specialist. Love explaining complex conditions simply.",followers:980,following:62,online:false},
+  {id:5,name:"Dr. Ananya Desai",email:"ananya@doc.com",password:"1234",role:"doctor",avatar:"AD",specialty:"Dermatologist",location:"Bengaluru, Karnataka",consultFee:650,bio:"MD Dermatology. Specializing in acne, hair loss, and anti-aging treatments. Believes in science-backed skin care.",followers:1520,following:112,online:true},
+  {id:6,name:"Dr. Rohan Gupta",email:"rohan@doc.com",password:"1234",role:"doctor",avatar:"RG",specialty:"Cardiologist",location:"Hyderabad, Telangana",consultFee:1000,bio:"DM Cardiology. Preventative heart care advocate. Focuses on lifestyle modifications for heart health.",followers:2100,following:45,online:true},
+  {id:7,name:"Dr. Neha Ali",email:"neha@doc.com",password:"1234",role:"doctor",avatar:"NA",specialty:"Pediatrician",location:"Chennai, Tamil Nadu",consultFee:700,bio:"MD Pediatrics. Dedicated to newborn care and child development. Here to answer your parenting questions.",followers:850,following:150,online:false},
   {id:3,name:"Rahul Verma",email:"rahul@patient.com",password:"1234",role:"patient",avatar:"RV",address:"123 Park Street, Kolkata",isAnonymous:false,bio:"Just trying to stay healthy. Father of two, software engineer.",followers:34,following:120,online:true},
   {id:4,name:"Sneha Kapoor",email:"sneha@patient.com",password:"1234",role:"patient",avatar:"SK",address:"45 Seaface Road, Mumbai",isAnonymous:true,bio:"Fitness enthusiast learning to navigate the healthcare system.",followers:67,following:210,online:false},
+  {id:8,name:"Amit Singh",email:"amit@patient.com",password:"1234",role:"patient",avatar:"AS",address:"78 Jubilee Hills, Hyderabad",isAnonymous:false,bio:"Avid runner. Recovering from a recent sports injury.",followers:120,following:300,online:true},
+  {id:9,name:"Kavita Reddy",email:"kavita@patient.com",password:"1234",role:"patient",avatar:"KR",address:"12 Marina Breach, Chennai",isAnonymous:false,bio:"Working mom of three. Always looking for quick, healthy recipes.",followers:45,following:80,online:false},
+  {id:10,name:"Anonymous Patient",email:"anon2@patient.com",password:"1234",role:"patient",avatar:"AP",address:"Delhi",isAnonymous:true,bio:"Prefer to ask questions privately.",followers:12,following:5,online:true},
 ];
 
 const HASHTAGS = ["#fever","#headache","#skinproblem","#mentalhealth","#dengue","#migraine","#allergy","#hearthealth","#diabetes","#nutrition","#sleep","#anxiety"];
@@ -345,6 +351,38 @@ const POSTS_INIT = [
    content:"📊 Migraine vs Tension Headache — Quick Reference Guide\n\nTension Headache:\n• Band-like pressure, both sides\n• Mild–moderate, doesn't throb\n• 30 min – 7 days\n• No nausea typically\n\nMigraine:\n• Pulsating, usually one side\n• Moderate–severe, disabling\n• 4–72 hours\n• Nausea, light/sound sensitivity\n• May have visual aura\n\n🚨 Red flags requiring urgent care:\n→ Worst headache of your life (thunderclap)\n→ Headache + fever + stiff neck\n→ New headache after age 50\n→ Neurological symptoms #headache #migraine #neurology",
    tags:["#headache","#migraine"],likes:203,liked:false,saved:true,
    createdAt:minsAgo(2880),comments:[]},
+  {id:6,userId:5,userName:"Dr. Ananya Desai",avatar:"AD",role:"doctor",type:"doctor_post",specialty:"Dermatologist",
+   content:"✨ Skincare Myth Busting! ✨\n\nMyth: You don't need sunscreen indoors or on cloudy days.\nFact: UV rays can penetrate windows and clouds! Even if you are indoors, you are exposed to UVA rays which cause premature aging.\n\nAlways wear a broad-spectrum SPF 30+ daily, regardless of the weather. Reapply every 2 hours if you're directly in the sun. Simple steps prevent long-term damage!\n\n#skincare #dermatology #preventativecare",
+   tags:["#skinproblem","#prevention"],likes:342,liked:false,saved:false,
+   createdAt:minsAgo(420),comments:[]},
+  {id:7,userId:8,userName:"Amit Singh",avatar:"AS",role:"patient",type:"patient_post",
+   content:"I've been experiencing a sharp pain in my lower back radiating down my right leg. It gets worse when I sneeze or cough. Any advice? 🏃‍♂️🤕 #backpain #injury",
+   tags:["#pain","#injury"],likes:12,liked:false,saved:false,
+   createdAt:minsAgo(120),comments:[
+     {id:103,userId:2,userName:"Dr. Arjun Mehta",avatar:"AM",role:"doctor",specialty:"Neurologist",
+      content:"Amit, this sounds highly suspicious for a herniated disc pressing on a nerve root (sciatica). The worsening with sneezing/coughing is a classic sign. Please avoid heavy lifting and bending. You need a clinical evaluation, possibly an MRI. Do not try to exercise through the pain.",
+      likes:45,liked:false,createdAt:minsAgo(90)}
+   ]},
+  {id:8,userId:6,userName:"Dr. Rohan Gupta",avatar:"RG",role:"doctor",type:"doctor_post",specialty:"Cardiologist",
+   content:"❤️ Heart Health 101: The role of sleep.\n\nDid you know that consistently getting less than 6 hours of sleep a night increases your risk of heart attacks and strokes? Sleep is when your body repairs itself, and your heart rate and blood pressure drop.\n\nPrioritize 7-8 hours of quality sleep for a healthier heart. It's not a luxury; it's a necessity. #hearthealth #sleep #cardiology",
+   tags:["#hearthealth","#sleep"],likes:512,liked:false,saved:true,
+   createdAt:minsAgo(1440),comments:[]},
+  {id:9,userId:10,userName:"Anonymous Patient",avatar:"AP",role:"patient",type:"patient_post",isAnonymous:true,
+   content:"Is it normal to feel completely exhausted all the time even when I sleep 9 hours? I also feel cold constantly. #fatigue #health",
+   tags:["#fatigue","#health"],likes:8,liked:false,saved:false,
+   createdAt:minsAgo(50),comments:[
+     {id:104,userId:1,userName:"Dr. Priya Sharma",avatar:"PS",role:"doctor",specialty:"General Physician",
+      content:"Feeling cold and exhausted despite adequate sleep are common signs of hypothyroidism (underactive thyroid) or anemia. I highly recommend getting a basic blood workup, specifically checking your TSH levels and a complete blood count.",
+      likes:12,liked:false,createdAt:minsAgo(20)}
+   ]},
+  {id:10,userId:9,userName:"Kavita Reddy",avatar:"KR",role:"patient",type:"patient_post",
+   content:"My 4-year-old has had a mild fever (100F) for two days now and a runny nose. No other symptoms, eating okay. Should I be worried? 🤒🧒 #fever #parenting",
+   tags:["#fever","#kids"],likes:19,liked:false,saved:false,
+   createdAt:minsAgo(200),comments:[
+     {id:105,userId:7,userName:"Dr. Neha Ali",avatar:"NA",role:"doctor",specialty:"Pediatrician",
+      content:"Kavita, a mild fever for 2 days with a runny nose and normal eating is usually a viral upper respiratory infection. Keep the child hydrated. If the fever spikes above 102F, lasts more than 3 days, or if the child stops drinking fluids, please see a pediatrician.",
+      likes:34,liked:false,createdAt:minsAgo(150)}
+   ]}
 ];
 
 // Merge dummy posts into initial data
@@ -713,9 +751,9 @@ const LeftSidebar = ({activePage, setPage}) => {
     {id:"feed",   label:"Home Feed",    icon:IC.home},
     {id:"search", label:"Search / Tags",icon:IC.search},
     {id:"doctors",label:"Doctors Only", icon:IC.steth},
-    {id:"consult",label:"AI Summariser",icon:IC.brain},
+    ...(isDoc ? [] : [{id:"consult",label:"AI Summariser",icon:IC.brain}]),
     {id:"outbreak",label:"Outbreak Map",icon:IC.mapPin},
-    {id:"tests",label:"Book Tests",icon:IC.calendar},
+    ...(isDoc ? [] : [{id:"tests",label:"Book Tests",icon:IC.calendar}]),
     ...(isDoc ? [{id:"dashboard",label:"Dashboard",icon:IC.clipboard}] : []),
     {id:"trends",label:"Health Trends",icon:IC.trend},
     {id:"profile",label:"My Profile",   icon:IC.user},
@@ -1128,6 +1166,7 @@ const ProfilePage = ({profileUserId, onHashtagClick}) => {
   const userPosts = posts.filter(p=>p.userId===profileUser?.id);
   const savedPosts = posts.filter(p=>p.saved);
   const patientReports = SYMPTOM_REPORTS.filter(r=>r.patientId===profileUser?.id);
+  const totalUpvotes = userPosts.reduce((sum, post) => sum + (post.likes || 0), 0);
 
   const handleSaveProfile = (data) => {
     if (updateProfile) updateProfile(baseUser?.id, data);
@@ -1183,7 +1222,7 @@ const ProfilePage = ({profileUserId, onHashtagClick}) => {
           {isDoc&&<p style={{fontSize:13,color:"var(--teal2)",marginBottom:4}}>🩺 {profileUser?.specialty}{profileUser?.location ? ` · 📍 ${profileUser.location}` : ""}</p>}
           <p style={{fontSize:14,color:"var(--text2)",lineHeight:1.55,marginBottom:10}}>{profileUser?.bio}</p>
           <div style={{display:"flex",gap:20,marginBottom:12}}>
-            {[["Posts",userPosts.length],["Followers",profileUser?.followers||0],["Following",profileUser?.following||0]].map(([l,v])=>(
+            {[["Posts",userPosts.length],["Followers",profileUser?.followers||0],["Following",profileUser?.following||0], ...(isDoc ? [["Upvotes", totalUpvotes]] : [])].map(([l,v])=>(
               <div key={l}>
                 <span style={{fontWeight:800,fontSize:16,color:"var(--text)"}}>{typeof v==="number"&&v>999?`${(v/1000).toFixed(1)}k`:v}</span>
                 <span style={{fontSize:12.5,color:"var(--text3)",marginLeft:4}}>{l}</span>
@@ -2681,7 +2720,14 @@ export default function App() {
   const [posts, setPosts] = useState(()=>{
     try {
       const saved = localStorage.getItem("svasthya_posts");
-      return saved ? JSON.parse(saved) : ALL_POSTS_INIT;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // If parsed length is less than ALL_POSTS_INIT, it means we added new mock data
+        // Let's just use ALL_POSTS_INIT to ensure new mock data is visible
+        if (parsed.length < ALL_POSTS_INIT.length) return ALL_POSTS_INIT;
+        return parsed;
+      }
+      return ALL_POSTS_INIT;
     } catch { return ALL_POSTS_INIT; }
   });
   const [profileId, setProfileId] = useState(null);
