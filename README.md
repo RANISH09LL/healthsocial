@@ -1,16 +1,48 @@
-# React + Vite
+# 🩺 HealthSocial
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive React application that serves as a social network and tele-health platform connecting patients and doctors. Built with React and Vite.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Dual User Roles**: Specialized interfaces and features for both 'Patient' and 'Doctor' roles.
+- **Community Feed**: Patients can post symptoms and questions. Doctors can post health tips and verified medical advice.
+- **AI Symptom Checker**: Integrated AI tool that analyzes symptoms and suggests possible triage levels or specialties to consult.
+- **Appointment Booking**: Patients can view available slots and book appointments with doctors directly from their profile.
+- **Dark Mode Support**: Beautifully crafted dark mode for low-light environments.
+- **Rich UI/UX**: Includes custom notifications, modal popups, interactive post cards, and sleek animations.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 18**
+- **Vite**
+- **CSS / Inline Styles** (Custom design system)
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+To run this project locally:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/RANISH09LL/healthsocial.git
+   cd healthsocial
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and visit `http://localhost:5173`
+
+## 📦 Building for Production
+
+To build the app for production, run:
+```bash
+npm run build
+```
+The optimized files will be generated in the `dist` folder.
